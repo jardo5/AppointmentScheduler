@@ -3,6 +3,8 @@ module com.example.appointmentscheduler {
     requires javafx.fxml;
 
 
-    opens com.example.appointmentscheduler to javafx.fxml;
-    exports com.example.appointmentscheduler;
+    opens jarod.appointmentscheduler to javafx.fxml;
+    exports jarod.appointmentscheduler;
+    exports controllers.appointmentscheduler;
+    opens controllers.appointmentscheduler to javafx.fxml;
 }

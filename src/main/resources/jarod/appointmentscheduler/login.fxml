@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="loginAnchor" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.appointmentscheduler.LoginController">
+   <children>
+      <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="550.0" prefWidth="400.0">
+         <items>
+            <VBox>
+               <children>
+                  <VBox>
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="19.0" prefWidth="401.0">
+                           <children>
+                              <Button fx:id="toolTipButton" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0">
+                                 <tooltip>
+                                    <Tooltip id="tooltip" fx:id="toolTip" contentDisplay="BOTTOM" graphicTextGap="5.0" height="50.0" text="Jarod Schupp - C195" textAlignment="CENTER" textOverrun="CLIP" width="20.0" wrapText="true">
+                                       <font>
+                                          <Font name="Fira Code Regular Nerd Font Complete Windows Compatible" size="12.0" />
+                                       </font>
+                                    </Tooltip>
+                                 </tooltip>
+                                 <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/info.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="94.0" prefWidth="401.0">
+                           <children>
+                              <StackPane prefHeight="155.0" prefWidth="398.0">
+                                 <children>
+                                    <ImageView id="jLogo" fx:id="jLogo" fitHeight="155.0" fitWidth="200.0" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/myLogos.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Line endX="300.0" fill="WHITE" startX="-100.0" stroke="WHITE" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <StackPane prefHeight="42.0" prefWidth="398.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
+                           <font>
+                              <Font name="Fira Code Bold Nerd Font Complete Windows Compatible" size="26.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <VBox prefHeight="300.0" prefWidth="398.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="398.0">
+                           <children>
+                              <TextField alignment="CENTER" prefHeight="25.0" prefWidth="149.0" promptText="Username" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="398.0">
+                           <children>
+                              <TextField alignment="CENTER" prefHeight="25.0" prefWidth="149.0" promptText="Password" />
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="37.0" prefWidth="401.0">
+                           <children>
+                              <Button id="loginButton" mnemonicParsing="false" text="Login">
+                                 <font>
+                                    <Font name="Fira Code Regular Nerd Font Complete Windows Compatible" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+                  <AnchorPane prefHeight="40.0" prefWidth="398.0">
+                     <children>
+                        <Label alignment="CENTER" layoutY="1.0" prefHeight="40.0" prefWidth="59.0" text="Zone" textFill="WHITE">
+                           <font>
+                              <Font name="Fira Code Regular Nerd Font Complete Windows Compatible" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="304.0" layoutY="1.0" prefHeight="40.0" prefWidth="94.0" text="English" textFill="WHITE">
+                           <font>
+                              <Font name="Fira Code Regular Nerd Font Complete Windows Compatible" size="18.0" />
+                           </font>
+                        </Label>
+                        <StackPane layoutY="1.0" prefHeight="40.0" prefWidth="401.0">
+                           <children>
+                              <Button id="quitProgramButton" mnemonicParsing="false" text="Button" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
