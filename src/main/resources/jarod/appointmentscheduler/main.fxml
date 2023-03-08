@@ -85,9 +85,9 @@
                         </StackPane>
                         <TableView prefHeight="208.0" prefWidth="1200.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="ID" />
-                              <TableColumn prefWidth="75.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="Address" />
+                              <TableColumn id="tableCol" prefWidth="75.0" text="ID" />
+                              <TableColumn id="tableCol" prefWidth="75.0" text="Name" />
+                              <TableColumn id="tableCol" prefWidth="75.0" text="Address" />
                               <TableColumn prefWidth="75.0" text="Zip Code" />
                               <TableColumn prefWidth="75.0" text="Phone #" />
                               <TableColumn prefWidth="75.0" text="Add Date" />
