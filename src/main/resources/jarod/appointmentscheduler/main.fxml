@@ -60,8 +60,8 @@
                         </TableView>
                         <AnchorPane prefHeight="21.0" prefWidth="1200.0">
                            <children>
-                              <Button id="addButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" text="Add" />
-                              <Button id="modifyButton" layoutX="61.0" layoutY="6.0" mnemonicParsing="false" text="Modify" />
+                              <Button id="addButton" fx:id="addAppButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#addAppButtonClick" text="Add" />
+                              <Button id="modifyButton" fx:id="appModifyButton" layoutX="61.0" layoutY="6.0" mnemonicParsing="false" onAction="#appModifyButtonClick" text="Modify" />
                               <Button id="deleteButton" layoutX="1134.0" layoutY="5.0" mnemonicParsing="false" text="Delete" />
                            </children>
                         </AnchorPane>

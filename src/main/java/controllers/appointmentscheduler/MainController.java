@@ -5,16 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainController {
     public Button logoutButton;
+    public ToggleGroup appointmentGroup;
 
     public void logoutButtonClick(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -35,5 +33,29 @@ public class MainController {
             }
         });
 
+    }
+    public void addAppButtonClick(ActionEvent actionEvent){
+        try {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/addAppointment.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 300);
+            stage.setTitle("Add Appointment");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void appModifyButtonClick(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/modifyAppointment.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 300);
+            stage.setTitle("Modify Appointment");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
