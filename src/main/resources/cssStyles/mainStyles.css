@@ -1,0 +1,88 @@
+#mainAnchor {
+    -fx-background-color: #0d0d0d;
+}
+
+SplitPane {
+    -fx-background-color: #0d0d0d;
+}
+
+AnchorPane {
+    -fx-background-color: #0d0d0d;
+}
+
+/* Add button */
+#addButton {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+}
+
+#addButton:hover {
+    -fx-background-color: #27ae60;
+}
+
+/* Modify button */
+#modifyButton {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+#modifyButton:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Delete button */
+#deleteButton {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+#deleteButton:hover {
+    -fx-background-color: #c0392b;
+}
+
+
+/* radio buttons */
+.radio-button .radio {
+    -fx-background-color: #2196F3;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #2196F3;
+}
+
+.radio-button:hover .radio {
+    -fx-background-color: #1976D2;
+}
+
+.radio-button:focused .radio {
+    -fx-background-color: #1565C0;
+}
+
+/* Styling the text of the radio button */
+.radio-button .radio .radio-text {
+    -fx-text-fill: #fff;
+}
+
+.radio-button .radio, .radio-button:selected .radio {
+    -fx-background-color: #a9a9a9;
+}
+
+.radio-button .radio:selected .dot {
+    -fx-background-color: white;
+}
+
+/* Logout button */
+#logoutButton {
+    -fx-background-color: #F55D5D;
+    -fx-text-fill: white;
+}
+
+#logoutButton:hover {
+    -fx-background-color: #E53E3E;
+}
+
+/* Report Button */
+#reportsButton {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}

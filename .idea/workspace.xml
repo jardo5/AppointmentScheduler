@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3553a3a-63c6-41f0-a6bf-19f8aef93c0e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/loginStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appointmentscheduler/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/LogInApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/appointmentscheduler/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/LogInApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/appointmentscheduler/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/loginStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cssStyles/loginStyles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -52,28 +49,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jarod/Desktop/Docs/AppointmentScheduler/src/main/resources&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "J:/MySQL/data/mysql-connector-j-8.0.31/mysql-connector-j-8.0.31.jar",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jarod\Desktop\Docs\AppointmentScheduler\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jarod\Desktop\Docs\AppointmentScheduler\src\main\resources\cssStyles" />
       <recent name="C:\Users\Jarod\Desktop\Docs\AppointmentScheduler\src\main\resources\jarod\appointmentscheduler\images" />
       <recent name="C:\Users\Jarod\Desktop\Docs\AppointmentScheduler\src\main\resources\jarod\appointmentscheduler" />
       <recent name="C:\Users\Jarod\Desktop\Docs\AppointmentScheduler\src\main\resources\images" />
@@ -90,7 +92,10 @@
       <updated>1678144095289</updated>
       <workItem from="1678144096409" duration="1144000" />
       <workItem from="1678149301554" duration="6743000" />
-      <workItem from="1678156910559" duration="2535000" />
+      <workItem from="1678156910559" duration="2670000" />
+      <workItem from="1678232797271" duration="1112000" />
+      <workItem from="1678233920758" duration="753000" />
+      <workItem from="1678234680155" duration="7251000" />
     </task>
     <servers />
   </component>

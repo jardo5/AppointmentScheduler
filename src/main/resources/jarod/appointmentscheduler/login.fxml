@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="loginAnchor" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.appointmentscheduler.LoginController">
+<AnchorPane id="loginAnchor" prefHeight="550.0" prefWidth="400.0" stylesheets="@../../cssStyles/loginStyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.appointmentscheduler.LoginController">
    <children>
       <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="550.0" prefWidth="400.0">
          <items>
@@ -86,7 +86,7 @@
                         </HBox>
                         <StackPane prefHeight="37.0" prefWidth="401.0">
                            <children>
-                              <Button id="loginButton" mnemonicParsing="false" text="Login">
+                              <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonClick" text="Login">
                                  <font>
                                     <Font name="Fira Code Regular Nerd Font Complete Windows Compatible" size="12.0" />
                                  </font>
@@ -109,7 +109,7 @@
                         </Label>
                         <StackPane layoutY="1.0" prefHeight="40.0" prefWidth="401.0">
                            <children>
-                              <Button id="quitProgramButton" mnemonicParsing="false" text="Button" />
+                              <Button id="quitProgramButton" fx:id="exitButton" mnemonicParsing="false" onAction="#exitButtonClick" text="Exit" />
                            </children>
                         </StackPane>
                      </children>

@@ -1,16 +1,30 @@
 package jarod.appointmentscheduler;
 
+import database.appointmentscheduler.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        ResourceBundle Language = ResourceBundle.getBundle("Language");
+        System.out.println("You're language is set to " + Locale.getDefault());
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 550);
+        scene.setUserAgentStylesheet("cssStyles/loginStyles.css");
+        stage.setTitle("Appointment Scheduler Login");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public static void main(String[] args) {
+        JDBC.openConnection();
+        launch();
+        JDBC.closeConnection();
     }
 }
