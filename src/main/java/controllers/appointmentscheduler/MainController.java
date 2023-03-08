@@ -14,6 +14,49 @@ public class MainController {
     public Button logoutButton;
     public ToggleGroup appointmentGroup;
 
+    /* Appointment Table */
+    public TableColumn appID;
+    public TableColumn appTitle;
+    public TableColumn appDescription;
+    public TableColumn appLocation;
+    public TableColumn appContact;
+    public TableColumn appType;
+    public TableColumn appStartDateTime;
+    public TableColumn appEndDateTime;
+    public TableColumn appCustomerID;
+    public TableColumn appUserID;
+
+    public Button addAppButton;
+    public Button modifyAppButton;
+
+    /* Customer Table */
+    public TableColumn custID;
+    public TableColumn custName;
+    public TableColumn custAddress;
+    public TableColumn custZipCode;
+    public TableColumn custPhoneNumber;
+    public TableColumn custDivision;
+    public TableColumn custAddDate;
+    public TableColumn custAddedBy;
+    public TableColumn custLastUpdate;
+    public TableColumn custLastUpdatedBy;
+
+    public Button addCustButton;
+    public Button modifyCustButton;
+
+
+    public void reportButtonClick(ActionEvent actionEvent){
+        try {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/report.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 300);
+            stage.setTitle("Reports");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void logoutButtonClick(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Logout");
@@ -34,6 +77,7 @@ public class MainController {
         });
 
     }
+
     public void addAppButtonClick(ActionEvent actionEvent){
         try {
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -52,6 +96,32 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/modifyAppointment.fxml"));
             Scene scene = new Scene(loader.load(), 600, 300);
             stage.setTitle("Modify Appointment");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addCustButtonClick(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/addCustomer.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 375);
+            stage.setTitle("Add Customer");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void modifyCustButtonClick(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/modifyCustomer.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 375);
+            stage.setTitle("Modify Customer");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

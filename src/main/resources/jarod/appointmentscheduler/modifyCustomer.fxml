@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.appointmentscheduler.ModifyCustomerController">
+   <children>
+      <SplitPane dividerPositions="0.12" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <StackPane prefHeight="44.0" prefWidth="598.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Customer" underline="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="598.0">
+               <children>
+                  <VBox alignment="BASELINE_CENTER" layoutX="76.0" prefHeight="347.0" prefWidth="238.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="284.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zip Code:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone #">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Divison">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox layoutX="314.0" prefHeight="347.0" prefWidth="150.0" spacing="12.0">
+                     <children>
+                        <TextField fx:id="custID" disable="true" />
+                        <TextField fx:id="custName" />
+                        <TextField fx:id="custAddress" />
+                        <TextField fx:id="custZipCode" />
+                        <TextField fx:id="custPhoneNumber" />
+                        <ComboBox fx:id="custCountryBox" prefWidth="150.0" />
+                        <ComboBox fx:id="custDivisionBox" prefWidth="150.0" />
+                        <HBox prefHeight="34.0" prefWidth="150.0" spacing="46.0">
+                           <children>
+                              <Button fx:id="appSaveButton" mnemonicParsing="false" onAction="#custSaveButtonClick" text="Save" />
+                              <Button fx:id="appCancelButton" mnemonicParsing="false" onAction="#custCancelButtonClick" text="Cancel" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -35,6 +35,8 @@ public class Appointments {
         this.Contact_ID = contact_ID;
     }
 
+
+
     public int getAppointment_ID() {
         return Appointment_ID;
     }

@@ -43,16 +43,16 @@
                         </AnchorPane>
                         <TableView prefHeight="208.0" prefWidth="1200.0">
                           <columns>
-                            <TableColumn prefWidth="67.0" text="ID" />
-                            <TableColumn prefWidth="173.0" text="Title" />
-                              <TableColumn prefWidth="75.0" text="Description" />
-                              <TableColumn prefWidth="75.0" text="Location" />
-                              <TableColumn prefWidth="75.0" text="Contact" />
-                              <TableColumn prefWidth="75.0" text="Type" />
-                              <TableColumn prefWidth="75.0" text="Start Date &amp; Time" />
-                              <TableColumn prefWidth="75.0" text="End Date &amp; Time" />
-                              <TableColumn prefWidth="75.0" text="Customer ID" />
-                              <TableColumn prefWidth="75.0" text="User ID" />
+                            <TableColumn id="tableCol2" fx:id="appID" prefWidth="67.0" text="ID" />
+                            <TableColumn id="tableCol1" fx:id="appTitle" prefWidth="173.0" text="Title" />
+                              <TableColumn id="tableCol2" fx:id="appDescription" prefWidth="75.0" text="Description" />
+                              <TableColumn id="tableCol1" fx:id="appLocation" prefWidth="75.0" text="Location" />
+                              <TableColumn id="tableCol2" fx:id="appContact" prefWidth="75.0" text="Contact" />
+                              <TableColumn id="tableCol1" fx:id="appType" prefWidth="75.0" text="Type" />
+                              <TableColumn id="tableCol2" fx:id="appStartDateTime" prefWidth="75.0" text="Start Date &amp; Time" />
+                              <TableColumn id="tableCol1" fx:id="appEndDateTime" prefWidth="75.0" text="End Date &amp; Time" />
+                              <TableColumn id="tableCol2" fx:id="appCustomerID" prefWidth="75.0" text="Customer ID" />
+                              <TableColumn id="tableCol1" fx:id="appUserID" prefWidth="75.0" text="User ID" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -61,7 +61,7 @@
                         <AnchorPane prefHeight="21.0" prefWidth="1200.0">
                            <children>
                               <Button id="addButton" fx:id="addAppButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#addAppButtonClick" text="Add" />
-                              <Button id="modifyButton" fx:id="appModifyButton" layoutX="61.0" layoutY="6.0" mnemonicParsing="false" onAction="#appModifyButtonClick" text="Modify" />
+                              <Button id="modifyButton" fx:id="modifyAppButton" layoutX="61.0" layoutY="6.0" mnemonicParsing="false" onAction="#appModifyButtonClick" text="Modify" />
                               <Button id="deleteButton" layoutX="1134.0" layoutY="5.0" mnemonicParsing="false" text="Delete" />
                            </children>
                         </AnchorPane>
@@ -84,16 +84,16 @@
                         </StackPane>
                         <TableView prefHeight="208.0" prefWidth="1200.0">
                            <columns>
-                              <TableColumn id="tableCol" prefWidth="75.0" text="ID" />
-                              <TableColumn id="tableCol" prefWidth="75.0" text="Name" />
-                              <TableColumn id="tableCol" prefWidth="75.0" text="Address" />
-                              <TableColumn prefWidth="75.0" text="Zip Code" />
-                              <TableColumn prefWidth="75.0" text="Phone #" />
-                              <TableColumn prefWidth="75.0" text="Add Date" />
-                              <TableColumn prefWidth="75.0" text="Added By" />
-                              <TableColumn prefWidth="75.0" text="Last Update" />
-                              <TableColumn prefWidth="75.0" text="Last Updated By" />
-                              <TableColumn prefWidth="75.0" text="Division ID" />
+                              <TableColumn id="tableCol1" fx:id="custID" prefWidth="75.0" text="ID" />
+                              <TableColumn id="tableCol2" fx:id="custName" prefWidth="75.0" text="Name" />
+                              <TableColumn id="tableCol1" fx:id="custAddress" prefWidth="75.0" text="Address" />
+                              <TableColumn id="tableCol2" fx:id="custZipCode" prefWidth="75.0" text="Zip Code" />
+                              <TableColumn id="tableCol1" fx:id="custPhoneNumber" prefWidth="75.0" text="Phone #" />
+                              <TableColumn id="tableCol2" fx:id="custAddDate" prefWidth="75.0" text="Add Date" />
+                              <TableColumn id="tableCol1" fx:id="custAddedBy" prefWidth="75.0" text="Added By" />
+                              <TableColumn id="tableCol2" fx:id="custLastUpdate" prefWidth="75.0" text="Last Update" />
+                              <TableColumn id="tableCol1" fx:id="custLastUpdatedBy" prefWidth="75.0" text="Last Updated By" />
+                              <TableColumn id="tableCol2" fx:id="custDivision" prefWidth="75.0" text="Division ID" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -101,8 +101,8 @@
                         </TableView>
                         <AnchorPane prefHeight="21.0" prefWidth="1200.0">
                            <children>
-                              <Button id="addButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" text="Add" />
-                              <Button id="modifyButton" layoutX="59.0" layoutY="6.0" mnemonicParsing="false" text="Modify" />
+                              <Button id="addButton" fx:id="addCustButton" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#addCustButtonClick" text="Add" />
+                              <Button id="modifyButton" fx:id="modifyCustButton" layoutX="59.0" layoutY="6.0" mnemonicParsing="false" onAction="#modifyCustButtonClick" text="Modify" />
                               <Button id="deleteButton" layoutX="1134.0" layoutY="5.0" mnemonicParsing="false" text="Delete" />
                            </children>
                         </AnchorPane>
