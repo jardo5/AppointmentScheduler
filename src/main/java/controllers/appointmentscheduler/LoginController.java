@@ -10,7 +10,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.ZoneId;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
+
 
 
 
@@ -19,6 +23,10 @@ public class LoginController implements Initializable {
 
     public Button loginButton;
     public Button exitButton;
+    public TextField usernameField;
+    public TextField passwordField;
+    public Label languageLabel;
+    public Label zoneLabel;
 
     public void loginButtonClick(ActionEvent actionEvent) throws Exception{
         //open new window
@@ -47,8 +55,20 @@ public class LoginController implements Initializable {
         });
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    };
+    private ResourceBundle Language;
+    ZoneId zoneId = ZoneId.systemDefault();
 
+    @Override
+    public void initialize(URL url, ResourceBundle Language) {
+
+        this.Language = Language;
+        System.out.println("You're language is set to " + Locale.getDefault());
+        System.out.println("Your time zone is set to " + TimeZone.getDefault());
+        usernameField.setPromptText(Language.getString("Username"));
+        passwordField.setPromptText(Language.getString("Password"));
+        loginButton.setText(Language.getString("Login"));
+        exitButton.setText(Language.getString("Exit"));
+        languageLabel.setText(String.valueOf(Locale.getDefault()));
+        zoneLabel.setText(String.valueOf(zoneId));
+    };
 }

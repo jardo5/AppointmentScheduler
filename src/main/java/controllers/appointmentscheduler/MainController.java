@@ -4,17 +4,22 @@ import jarod.appointmentscheduler.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable {
     public Button logoutButton;
     public ToggleGroup appointmentGroup;
 
     /* Appointment Table */
+    public TableView AppointmentsTable;
     public TableColumn appID;
     public TableColumn appTitle;
     public TableColumn appDescription;
@@ -30,6 +35,7 @@ public class MainController {
     public Button modifyAppButton;
 
     /* Customer Table */
+    public TableView CustomersTable;
     public TableColumn custID;
     public TableColumn custName;
     public TableColumn custAddress;
@@ -43,6 +49,11 @@ public class MainController {
 
     public Button addCustButton;
     public Button modifyCustButton;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 
 
     public void reportButtonClick(ActionEvent actionEvent){
@@ -128,4 +139,5 @@ public class MainController {
             e.printStackTrace();
         }
     }
+
 }

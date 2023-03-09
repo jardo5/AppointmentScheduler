@@ -41,7 +41,7 @@
                               </Text>
                            </children>
                         </AnchorPane>
-                        <TableView prefHeight="208.0" prefWidth="1200.0">
+                        <TableView fx:id="AppointmentsTable" prefHeight="208.0" prefWidth="1200.0">
                           <columns>
                             <TableColumn id="tableCol2" fx:id="appID" prefWidth="67.0" text="ID" />
                             <TableColumn id="tableCol1" fx:id="appTitle" prefWidth="173.0" text="Title" />
@@ -82,7 +82,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <TableView prefHeight="208.0" prefWidth="1200.0">
+                        <TableView fx:id="CustomersTable" prefHeight="208.0" prefWidth="1200.0">
                            <columns>
                               <TableColumn id="tableCol1" fx:id="custID" prefWidth="75.0" text="ID" />
                               <TableColumn id="tableCol2" fx:id="custName" prefWidth="75.0" text="Name" />

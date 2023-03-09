@@ -16,9 +16,10 @@ public class MainApplication extends Application {
         ResourceBundle Language = ResourceBundle.getBundle("Language");
         System.out.println("You're language is set to " + Locale.getDefault());
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login.fxml"));
+        fxmlLoader.setResources(Language);
         Scene scene = new Scene(fxmlLoader.load(), 400, 550);
         scene.setUserAgentStylesheet("cssStyles/loginStyles.css");
-        stage.setTitle("Appointment Scheduler Login");
+        stage.setTitle(Language.getString("Login"));
         stage.setScene(scene);
         stage.show();
     }
