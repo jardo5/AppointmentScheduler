@@ -1,5 +1,7 @@
 package controllers.appointmentscheduler;
 
+import database.appointmentscheduler.Query;
+import database.appointmentscheduler.UserSQL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import models.appointmentscheduler.Users;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -28,19 +31,33 @@ public class LoginController implements Initializable {
     public Label languageLabel;
     public Label zoneLabel;
 
-    public void loginButtonClick(ActionEvent actionEvent) throws Exception{
-        //open new window
+    public void loginButtonClick(ActionEvent actionEvent) throws Exception {
         try {
-            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/main.fxml"));
-            Scene scene = new Scene(loader.load(), 1200, 605);
-            stage.setTitle("Appointment Scheduler");
-            stage.setScene(scene);
-            stage.show();
+            Users loggedUser = UserSQL.loggedUser(usernameField.getText(), passwordField.getText());
+
+            if (loggedUser != null) { // check if a user was successfully logged in
+                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/main.fxml"));
+                Scene scene = new Scene(loader.load(), 1200, 605);
+                stage.setTitle("Appointment Scheduler");
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                // show an error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Error");
+                alert.setHeaderText("Invalid username or password");
+                alert.setContentText("Please try again");
+                alert.showAndWait();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
+
     public void exitButtonClick(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit Appointment Scheduler");
@@ -62,8 +79,6 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle Language) {
 
         this.Language = Language;
-        System.out.println("You're language is set to " + Locale.getDefault());
-        System.out.println("Your time zone is set to " + TimeZone.getDefault());
         usernameField.setPromptText(Language.getString("Username"));
         passwordField.setPromptText(Language.getString("Password"));
         loginButton.setText(Language.getString("Login"));

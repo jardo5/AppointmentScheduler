@@ -1,28 +1,22 @@
 package database.appointmentscheduler;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Query {
     private static String sqlQuery;
     private static Statement statement;
     private static ResultSet results;
 
-    public static void createQuery(String query) {
-        sqlQuery = query;
+    public static PreparedStatement createQuery(String query) {
+        PreparedStatement statement = null;
         try {
-            statement = JDBC.connection.createStatement();
-
-            if (sqlQuery.toLowerCase().startsWith("select")) {
-                results = statement.executeQuery(sqlQuery);
-            }
-            if (sqlQuery.toLowerCase().startsWith("delete") || sqlQuery.toLowerCase().startsWith("insert") || sqlQuery.toLowerCase().startsWith("update")) {
-                statement.executeUpdate(sqlQuery);
-            }
+            statement = JDBC.connection.prepareStatement(query);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return statement;
     }
+
 
     public static ResultSet getResults() {
         return results;

@@ -3,6 +3,8 @@ package models.appointmentscheduler;
 import java.time.LocalDateTime;
 
 public class Users {
+    private static Users loggedUser;
+
     private int User_ID;
     private String User_Name;
     private String Password;
@@ -11,14 +13,13 @@ public class Users {
     private LocalDateTime Last_Update;
     private String Updated_By;
 
-    public Users(int user_ID, String user_Name, String password, LocalDateTime create_Date, String created_By, LocalDateTime last_Update, String updated_By) {
+    public Users(int user_ID, String user_Name) {
         this.User_ID = user_ID;
         this.User_Name = user_Name;
-        this.Password = password;
-        this.Create_Date = create_Date;
-        this.Created_By = created_By;
-        this.Last_Update = last_Update;
-        this.Updated_By = updated_By;
+    }
+
+    public static void setLoggedUser(Users loggedUser) {
+        Users.loggedUser = loggedUser;
     }
 
     public int getUser_ID() {
