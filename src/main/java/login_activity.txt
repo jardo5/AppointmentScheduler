@@ -1,0 +1,4 @@
+User: admin logged in at 2023-03-11T17:07:17.123254500
+Success: User: admin logged in at 2023-03-11T17:12:11.553412.
+Success: User: test logged in at 2023-03-11T17:14:38.139226900.
+Failed: User: qwerty attempted to log in at 2023-03-11T17:15:49.803535700.
