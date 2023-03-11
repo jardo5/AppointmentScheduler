@@ -7,36 +7,40 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class ModifyCustomerController {
-    public TextField custID;
-    public TextField custName;
-    public TextField custAddress;
-    public TextField custZipCode;
-    public TextField custPhoneNumber;
-    public ComboBox custCountryBox;
-    public ComboBox custDivisionBox;
 
+  public TextField custID;
+  public TextField custName;
+  public TextField custAddress;
+  public TextField custZipCode;
+  public TextField custPhoneNumber;
+  public ComboBox custCountryBox;
+  public ComboBox custDivisionBox;
 
-    public void custSaveButtonClick(ActionEvent actionEvent) {
-    }
+  public void custSaveButtonClick(ActionEvent actionEvent) {}
 
-    public void custCancelButtonClick(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Cancel");
-        alert.setHeaderText("Are you sure you want to cancel?");
-        alert.setContentText("Click OK to cancel. All progress will be lost.");
-        alert.showAndWait().ifPresent(rs -> {
-            if (rs == ButtonType.OK) {
-                try {
-                    Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/main.fxml"));
-                    Scene scene = new Scene(loader.load(), 1200, 605);
-                    stage.setTitle("Appointment Scheduler");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+  public void custCancelButtonClick(ActionEvent actionEvent) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Cancel");
+    alert.setHeaderText("Are you sure you want to cancel?");
+    alert.setContentText("Click OK to cancel. All progress will be lost.");
+    alert
+      .showAndWait()
+      .ifPresent(rs -> {
+        if (rs == ButtonType.OK) {
+          try {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
+              .getWindow();
+            FXMLLoader loader = new FXMLLoader(
+              getClass().getResource("/jarod/appointmentscheduler/main.fxml")
+            );
+            Scene scene = new Scene(loader.load(), 1200, 605);
+            stage.setTitle("Appointment Scheduler");
+            stage.setScene(scene);
+            stage.show();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      });
+  }
 }
