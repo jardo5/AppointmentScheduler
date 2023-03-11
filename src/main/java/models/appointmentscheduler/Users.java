@@ -6,7 +6,7 @@ public class Users {
     private static Users loggedUser;
 
     private int User_ID;
-    private String User_Name;
+    private static String User_Name;
     private String Password;
     private LocalDateTime Create_Date;
     private String Created_By;
@@ -30,7 +30,7 @@ public class Users {
         this.User_ID = user_ID;
     }
 
-    public String getUser_Name() {
+    public static String getUser_Name() {
         return User_Name;
     }
 
@@ -76,5 +76,11 @@ public class Users {
 
     public void setUpdated_By(String updated_By) {
         this.Updated_By = updated_By;
+    }
+
+    //Necessary for ComboBox
+    @Override
+    public String toString() {
+        return User_Name;
     }
 }

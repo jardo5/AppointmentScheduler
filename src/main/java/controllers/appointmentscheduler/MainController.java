@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import static database.appointmentscheduler.AppSQL.getAllAppointments;
+import static database.appointmentscheduler.CustSQL.getAllCustomers;
 
 public class MainController implements Initializable {
     public Button logoutButton;
@@ -171,6 +172,21 @@ public class MainController implements Initializable {
             Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
             User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
             Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+
+            CustomersTable.setItems(getAllCustomers());
+
+            custID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+            custName.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));
+            custAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+            custZipCode.setCellValueFactory(new PropertyValueFactory<>("Postal_Code"));
+            custPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+            custDivision.setCellValueFactory(new PropertyValueFactory<>("Division"));
+            custAddDate.setCellValueFactory(new PropertyValueFactory<>("Create_Date"));
+            custAddedBy.setCellValueFactory(new PropertyValueFactory<>("Created_By"));
+            custLastUpdate.setCellValueFactory(new PropertyValueFactory<>("Last_Update"));
+            custLastUpdatedBy.setCellValueFactory(new PropertyValueFactory<>("Last_Updated_By"));
+            custDivision.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
+
 
 
         } catch (Exception e) {

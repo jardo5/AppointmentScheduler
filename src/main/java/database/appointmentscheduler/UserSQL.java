@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import models.appointmentscheduler.Users;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,6 +69,7 @@ public class UserSQL {
         return null;
     }
 
-
-
+    public static String getCurrentUser() {
+        return Users.getUser_Name();
+    }
 }

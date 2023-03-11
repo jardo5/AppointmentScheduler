@@ -82,14 +82,25 @@
                         <Insets top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox layoutX="449.0" prefHeight="347.0" prefWidth="150.0" spacing="12.5">
+                  <VBox layoutX="449.0" prefHeight="347.0" prefWidth="150.0" spacing="14.0">
                      <padding>
-                        <Insets right="5.0" top="5.0" />
+                        <Insets right="5.0" top="10.0" />
                      </padding>
                      <children>
-                        <DatePicker fx:id="appDatePicker" />
-                        <ComboBox fx:id="appStartTimeBox" prefWidth="150.0" />
-                        <ComboBox fx:id="appEndTimeBox" prefWidth="150.0" />
+                        <DatePicker fx:id="appStartDate" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="appStartTimeHours" prefWidth="150.0" />
+                              <ComboBox fx:id="appStartTimeMinutes" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <DatePicker fx:id="appEndDate" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="appEndTimeHours" prefWidth="150.0" />
+                              <ComboBox fx:id="appEndTimeMinutes" prefWidth="150.0" />
+                           </children>
+                        </HBox>
                         <ComboBox fx:id="appCustomerID" prefWidth="150.0" />
                         <ComboBox fx:id="appUserID" prefWidth="150.0" />
                         <HBox prefHeight="34.0" prefWidth="150.0" spacing="46.0">
@@ -102,12 +113,17 @@
                   </VBox>
                   <VBox alignment="BASELINE_CENTER" layoutX="314.0" prefHeight="347.0" prefWidth="150.0" spacing="15.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Time:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -128,9 +144,6 @@
                            </font>
                         </Text>
                      </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
                   </VBox>
                </children>
             </AnchorPane>

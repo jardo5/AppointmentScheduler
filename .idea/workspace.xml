@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f3553a3a-63c6-41f0-a6bf-19f8aef93c0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddAppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/AppSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/AppSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/JDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Appointments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Appointments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/UserSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/UserSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Contacts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Contacts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/addAppointment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/addAppointment.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <workItem from="1678233920758" duration="753000" />
       <workItem from="1678234680155" duration="7727000" />
       <workItem from="1678296671812" duration="6663000" />
-      <workItem from="1678478936591" duration="13762000" />
+      <workItem from="1678478936591" duration="25005000" />
     </task>
     <servers />
   </component>
@@ -125,6 +124,10 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="9" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Users.java</url>
           <line>15</line>
@@ -135,14 +138,14 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/database/appointmentscheduler/UserSQL.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Appointments.java</url>
           <line>68</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Customers.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

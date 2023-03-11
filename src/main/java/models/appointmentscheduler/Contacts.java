@@ -34,4 +34,10 @@ public class Contacts {
     public void setEmail(String email) {
         this.Email = email;
     }
+
+    // Necessary for ComboBox
+    @Override
+    public String toString() {
+        return Contact_Name;
+    }
 }
