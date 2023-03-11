@@ -7,7 +7,7 @@ public class Divisions {
 
   private int Division_ID;
   private String Division;
-  private LocalDateTime Create_Date;
+  private Timestamp Create_Date;
   private String Created_By;
   private Timestamp Last_Update;
   private String Updated_By;
@@ -16,7 +16,7 @@ public class Divisions {
   public Divisions(
     int division_ID,
     String division,
-    LocalDateTime create_Date,
+    Timestamp create_Date,
     String created_By,
     Timestamp last_Update,
     String updated_By,
@@ -47,11 +47,11 @@ public class Divisions {
     Division = division;
   }
 
-  public LocalDateTime getCreate_Date() {
+  public Timestamp getCreate_Date() {
     return Create_Date;
   }
 
-  public void setCreate_Date(LocalDateTime create_Date) {
+  public void setCreate_Date(Timestamp create_Date) {
     Create_Date = create_Date;
   }
 
@@ -86,4 +86,10 @@ public class Divisions {
   public void setCountry_ID(int country_ID) {
     Country_ID = country_ID;
   }
+
+  @Override
+  // Necessary to display the division name in the ComboBox
+    public String toString() {
+        return Division;
+    }
 }

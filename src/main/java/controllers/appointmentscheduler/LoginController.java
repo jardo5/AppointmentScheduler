@@ -39,7 +39,7 @@ public class LoginController implements Initializable {
         FXMLLoader loader = new FXMLLoader(
           getClass().getResource("/jarod/appointmentscheduler/main.fxml")
         );
-        Scene scene = new Scene(loader.load(), 1300, 605);
+        Scene scene = new Scene(loader.load(), 1300, 650);
         stage.setTitle("Appointment Scheduler");
         stage.setScene(scene);
         stage.show();

@@ -74,4 +74,10 @@ public class Countries {
   public void setUpdated_By(String updated_By) {
     Updated_By = updated_By;
   }
+
+  //Necessary for ComboBox
+  @Override
+    public String toString() {
+        return Country;
+    }
 }
