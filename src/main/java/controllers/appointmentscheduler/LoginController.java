@@ -35,10 +35,12 @@ public class LoginController implements Initializable {
         try {
             Users loggedUser = UserSQL.loggedUser(usernameField.getText(), passwordField.getText());
 
+
+
             if (loggedUser != null) { // check if a user was successfully logged in
                 Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/main.fxml"));
-                Scene scene = new Scene(loader.load(), 1200, 605);
+                Scene scene = new Scene(loader.load(), 1300, 605);
                 stage.setTitle("Appointment Scheduler");
                 stage.setScene(scene);
                 stage.show();

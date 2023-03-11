@@ -1,5 +1,6 @@
 package models.appointmentscheduler;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Appointments {
@@ -34,6 +35,7 @@ public class Appointments {
         this.User_ID = user_ID;
         this.Contact_ID = contact_ID;
     }
+
 
     public int getAppointment_ID() {
         return Appointment_ID;

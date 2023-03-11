@@ -1,6 +1,8 @@
 package controllers.appointmentscheduler;
 
+import database.appointmentscheduler.AppSQL;
 import jarod.appointmentscheduler.MainApplication;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,27 +11,40 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import models.appointmentscheduler.Appointments;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+
+import static database.appointmentscheduler.AppSQL.getAllAppointments;
 
 public class MainController implements Initializable {
     public Button logoutButton;
+
     public ToggleGroup appointmentGroup;
+    public RadioButton radioAll;
 
     /* Appointment Table */
     public TableView AppointmentsTable;
-    public TableColumn appID;
-    public TableColumn appTitle;
-    public TableColumn appDescription;
-    public TableColumn appLocation;
-    public TableColumn appContact;
-    public TableColumn appType;
-    public TableColumn appStartDateTime;
-    public TableColumn appEndDateTime;
-    public TableColumn appCustomerID;
-    public TableColumn appUserID;
+    public TableColumn Appointment_ID;
+    public TableColumn Title;
+    public TableColumn Description;
+    public TableColumn Location;
+    public TableColumn Type;
+    public TableColumn Start;
+    public TableColumn End;
+    public TableColumn Create_Date;
+    public TableColumn Created_By;
+    public TableColumn Last_Update;
+    public TableColumn Last_Updated_By;
+    public TableColumn Customer_ID;
+    public TableColumn User_ID;
+    public TableColumn Contact_ID;
+
+
 
     public Button addAppButton;
     public Button modifyAppButton;
@@ -50,8 +65,117 @@ public class MainController implements Initializable {
     public Button addCustButton;
     public Button modifyCustButton;
 
+
+    public static void appointmentNotification(){
+        try {
+            ObservableList<Appointments> appointmentList = getAllAppointments();
+            for (Appointments appointment : appointmentList) {
+                if (appointment.getStart().isAfter(LocalDateTime.now()) && appointment.getStart().isBefore(LocalDateTime.now().plusMinutes(15))) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Reminder");
+                    alert.setHeaderText("Appointment Reminder");
+                    alert.setContentText("You have an appointment in 15 minutes.");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Reminder");
+                    alert.setHeaderText("Appointment Reminder");
+                    alert.setContentText("You have no appointments in the next 15 minutes.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void radioWeekClick() throws SQLException {
+        AppointmentsTable.setItems(AppSQL.getWeeklyAppointments());
+
+        Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        Create_Date.setCellValueFactory(new PropertyValueFactory<>("Create_Date"));
+        Created_By.setCellValueFactory(new PropertyValueFactory<>("Created_By"));
+        Last_Update.setCellValueFactory(new PropertyValueFactory<>("Last_Update"));
+        Last_Updated_By.setCellValueFactory(new PropertyValueFactory<>("Updated_By"));
+        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+        User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+
+
+    }
+    public void radioMonthClick() throws SQLException {
+        AppointmentsTable.setItems(AppSQL.getMonthlyAppointments());
+
+        Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        Create_Date.setCellValueFactory(new PropertyValueFactory<>("Create_Date"));
+        Created_By.setCellValueFactory(new PropertyValueFactory<>("Created_By"));
+        Last_Update.setCellValueFactory(new PropertyValueFactory<>("Last_Update"));
+        Last_Updated_By.setCellValueFactory(new PropertyValueFactory<>("Updated_By"));
+        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+        User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+
+
+
+    }
+    public void radioAllClick(ActionEvent actionEvent) throws Exception {
+        AppointmentsTable.setItems(getAllAppointments());
+
+        Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        Create_Date.setCellValueFactory(new PropertyValueFactory<>("Create_Date"));
+        Created_By.setCellValueFactory(new PropertyValueFactory<>("Created_By"));
+        Last_Update.setCellValueFactory(new PropertyValueFactory<>("Last_Update"));
+        Last_Updated_By.setCellValueFactory(new PropertyValueFactory<>("Updated_By"));
+        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+        User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            AppointmentsTable.setItems(getAllAppointments());
+
+            Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+            Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+            Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+            Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+            Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+            Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+            End.setCellValueFactory(new PropertyValueFactory<>("End"));
+            Create_Date.setCellValueFactory(new PropertyValueFactory<>("Create_Date"));
+            Created_By.setCellValueFactory(new PropertyValueFactory<>("Created_By"));
+            Last_Update.setCellValueFactory(new PropertyValueFactory<>("Last_Update"));
+            Last_Updated_By.setCellValueFactory(new PropertyValueFactory<>("Updated_By"));
+            Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+            User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+            Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
