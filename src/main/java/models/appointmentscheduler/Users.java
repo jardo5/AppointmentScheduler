@@ -82,6 +82,6 @@ public class Users {
   //Necessary for ComboBox
   @Override
   public String toString() {
-    return User_Name;
+    return (Integer.toString(User_ID) + " " + User_Name);
   }
 }

@@ -39,6 +39,6 @@ public class Contacts {
   // Necessary for ComboBox
   @Override
   public String toString() {
-    return Contact_Name;
+    return (Integer.toString(Contact_ID) + " " + Contact_Name);
   }
 }

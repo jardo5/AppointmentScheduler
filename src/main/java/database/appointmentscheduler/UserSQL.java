@@ -1,9 +1,7 @@
 package database.appointmentscheduler;
 
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -72,5 +70,18 @@ public class UserSQL {
 
   public static String getCurrentUser() {
     return Users.getUser_Name();
+  }
+
+  public static Users getUser(int Id) throws SQLException, Exception{
+    String sqlStatement = "SELECT * FROM users WHERE User_ID = '" + Id + "'";
+    Connection conn = JDBC.connection;
+    ResultSet result = conn.createStatement().executeQuery(sqlStatement);
+    if (result.next()) {
+      int resUserId = result.getInt("User_ID");
+      String resUserName = result.getString("User_Name");
+      Users queryResults = new Users(resUserId, resUserName);
+      return queryResults;
+    }
+    return null;
   }
 }

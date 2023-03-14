@@ -22,8 +22,6 @@ public class DivisionSQL {
         return result.getInt("Division_ID");
     }
 
-
-
     public static ObservableList<Divisions> getAllDivisionNames() throws SQLException{
         ObservableList<Divisions> divisionList = FXCollections.observableArrayList();
         String sql = "SELECT Division_ID, Division, Create_Date, Created_By, Last_Update, Last_Updated_By, COUNTRY_ID FROM first_level_divisions"; // Column 'Division_ID' not found??.
@@ -44,6 +42,5 @@ public class DivisionSQL {
         }
         return divisionList;
     }
-
 
 }

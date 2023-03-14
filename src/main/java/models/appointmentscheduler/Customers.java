@@ -122,6 +122,6 @@ public class Customers {
   // Necessary for ComboBox
   @Override
   public String toString() {
-    return Customer_Name;
+    return (Integer.toString(Customer_ID) + " " + Customer_Name);
   }
 }

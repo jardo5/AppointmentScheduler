@@ -1,6 +1,5 @@
 package models.appointmentscheduler;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Appointments {
@@ -92,7 +91,7 @@ public class Appointments {
     this.Type = type;
   }
 
-  public LocalDateTime getStart() {
+  public  LocalDateTime getStart() {
     return Start;
   }
 

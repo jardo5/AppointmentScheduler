@@ -1,18 +1,9 @@
 package controllers.appointmentscheduler;
 
-import static database.appointmentscheduler.AppSQL.getAllAppointments;
-import static database.appointmentscheduler.CustSQL.getAllCustomers;
-
 import database.appointmentscheduler.AppSQL;
 import jarod.appointmentscheduler.MainApplication;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -20,6 +11,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.appointmentscheduler.Appointments;
+import models.appointmentscheduler.Customers;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ResourceBundle;
+
+import static controllers.appointmentscheduler.ModifyCustomerController.modifyCustomer;
+import static database.appointmentscheduler.AppSQL.getAllAppointments;
+import static database.appointmentscheduler.CustomersSQL.getAllCustomers;
 
 public class MainController implements Initializable {
 
@@ -29,7 +31,7 @@ public class MainController implements Initializable {
   public RadioButton radioAll;
 
   /* Appointment Table */
-  public TableView AppointmentsTable;
+  public TableView <Appointments> AppointmentsTable;
   public TableColumn Appointment_ID;
   public TableColumn Title;
   public TableColumn Description;
@@ -266,7 +268,7 @@ public class MainController implements Initializable {
         getClass()
           .getResource("/jarod/appointmentscheduler/addAppointment.fxml")
       );
-      Scene scene = new Scene(loader.load(), 600, 300);
+      Scene scene = new Scene(loader.load(), 600, 310);
       stage.setTitle("Add Appointment");
       stage.setScene(scene);
       stage.show();
@@ -276,20 +278,32 @@ public class MainController implements Initializable {
   }
 
   public void appModifyButtonClick(ActionEvent actionEvent) {
-    try {
-      Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
-        .getWindow();
-      FXMLLoader loader = new FXMLLoader(
-        getClass()
-          .getResource("/jarod/appointmentscheduler/modifyAppointment.fxml")
-      );
-      Scene scene = new Scene(loader.load(), 600, 300);
-      stage.setTitle("Modify Appointment");
-      stage.setScene(scene);
-      stage.show();
-    } catch (Exception e) {
-      e.printStackTrace();
+    Appointments selectedAppointment = AppointmentsTable.getSelectionModel().getSelectedItem();
+
+    if (selectedAppointment == null) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("No Appointment Selected");
+      alert.setContentText("Please select an appointment to modify.");
+      alert.showAndWait();
+    } else {
+      try {
+        ModifyAppointmentController.retrieveAppointments(selectedAppointment);
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
+          .getWindow();
+        FXMLLoader loader = new FXMLLoader(
+          getClass()
+            .getResource("/jarod/appointmentscheduler/modifyAppointment.fxml")
+        );
+        Scene scene = new Scene(loader.load(), 600, 310);
+        stage.setTitle("Modify Appointment");
+        stage.setScene(scene);
+        stage.show();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
+
   }
 
   public void addCustButtonClick(ActionEvent actionEvent) {
@@ -310,6 +324,7 @@ public class MainController implements Initializable {
 
   public void modifyCustButtonClick(ActionEvent actionEvent) {
     try {
+      ModifyCustomerController.getModifyCustomer(modifyCustomer);
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
         .getWindow();
       FXMLLoader loader = new FXMLLoader(

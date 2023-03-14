@@ -21,4 +21,31 @@ public class CountriesSQL {
         return allCountriesNames;
     }
 
+    public static Object findCountryID(int divisionId) {
+        String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = " + divisionId;
+        try {
+            Connection conn = JDBC.connection;
+            ResultSet result = conn.createStatement().executeQuery(sql);
+            while (result.next()) {
+                return result.getInt("Country_ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object getCountry_Name(int divisionId) {
+        String sql = "SELECT Country FROM countries WHERE Country_ID = " + findCountryID(divisionId);
+        try {
+            Connection conn = JDBC.connection;
+            ResultSet result = conn.createStatement().executeQuery(sql);
+            while (result.next()) {
+                return result.getString("Country");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

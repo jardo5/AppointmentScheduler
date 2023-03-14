@@ -200,4 +200,38 @@ public class AppSQL {
       e.printStackTrace();
     }
   }
+
+  public static void updateAppointment(
+    int tempID,
+    String tempTitle,
+    String tempDescription,
+    String tempLocation,
+    int tempContactID,
+    String tempType,
+    LocalDateTime tempStart,
+    LocalDateTime tempEnd,
+    int tempCustomerID,
+    int tempUserID
+  ) {
+    try {
+      Connection conn = JDBC.connection;
+      String sql =
+        "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Contact_ID = ?, Type = ?, Start = ?, End = ?, Last_Update = NOW(), Last_Updated_By = ?, Customer_ID = ?, User_ID = ? WHERE Appointment_ID = ?";
+      PreparedStatement statement = conn.prepareStatement(sql);
+      statement.setString(1, tempTitle);
+      statement.setString(2, tempDescription);
+      statement.setString(3, tempLocation);
+      statement.setInt(4, tempContactID);
+      statement.setString(5, tempType);
+      statement.setTimestamp(6, Timestamp.valueOf(tempStart));
+      statement.setTimestamp(7, Timestamp.valueOf(tempEnd));
+      statement.setString(8, (UserSQL.getCurrentUser()));
+      statement.setInt(9, tempCustomerID);
+      statement.setInt(10, tempUserID);
+      statement.setInt(11, tempID);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 }

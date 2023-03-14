@@ -33,7 +33,3 @@ public class MainApplication extends Application {
     JDBC.closeConnection();
   }
 }
-
-//TODO: Delete Button for Customer/Appointment
-//TODO Resize windows.
-//TODO Fix Customer Delete Button
