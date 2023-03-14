@@ -5,26 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3553a3a-63c6-41f0-a6bf-19f8aef93c0e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddAppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddCustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/ModifyAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/ModifyAppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/ModifyCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/ModifyCustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/AppSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/AppSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CountriesSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CountriesSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CustSQL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/ContactsSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/ContactsSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CustomersSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CustomersSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/DivisionSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/DivisionSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/UserSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/appointmentscheduler/UserSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jarod/appointmentscheduler/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Appointments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Appointments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Contacts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Contacts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Customers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Customers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/modifyAppointment.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/modifyCustomer.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/modifyAppointment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/modifyAppointment.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,34 +41,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindowBuild.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "last_directory_selection": "/Users/jarod/Documents/AppointmentScheduler/src/main/java/jarod/appointmentscheduler",
-    "last_opened_file_path": "C:/Users/Jarod/Desktop/Docs/AppointmentScheduler/src/main/resources/jarod/appointmentscheduler",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "discord-application",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowBuild.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/jarod/Documents/AppointmentScheduler/src/main/java/jarod/appointmentscheduler&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jarod/Desktop/Docs/AppointmentScheduler/src/main/resources/jarod/appointmentscheduler&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.obiscr.chatgpt.settings.GPT3-3.5-Turbo&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jarod\Desktop\Docs\AppointmentScheduler\src\main\resources\jarod\appointmentscheduler" />
@@ -115,7 +102,8 @@
       <workItem from="1678478936591" duration="25966000" />
       <workItem from="1678566781201" duration="7500000" />
       <workItem from="1678742926873" duration="1044000" />
-      <workItem from="1678743989236" duration="13522000" />
+      <workItem from="1678743989236" duration="14029000" />
+      <workItem from="1678795450501" duration="5488000" />
     </task>
     <servers />
   </component>
@@ -154,15 +142,6 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java</url>
-          <line>279</line>
-          <properties class="controllers.appointmentscheduler.MainController" method="appModifyButtonClick">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/AddAppointmentController.java</url>
           <line>244</line>
           <properties class="controllers.appointmentscheduler.AddAppointmentController" method="appCancelButtonClick">
@@ -171,10 +150,29 @@
           </properties>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CustomersSQL.java</url>
+          <line>46</line>
+          <properties class="database.appointmentscheduler.CustomersSQL" method="addCustomer">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/models/appointmentscheduler/Divisions.java</url>
           <line>34</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/database/appointmentscheduler/CustomersSQL.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java</url>
+          <line>280</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

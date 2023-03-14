@@ -27,7 +27,7 @@ public class ContactsSQL {
     return contactList;
   }
 
-  public static Contacts getContact(int contactID) throws SQLException {
+  public static Contacts getContactName(int contactID) throws SQLException {
     String sql = "SELECT * FROM contacts WHERE Contact_ID = ?";
     Connection conn = JDBC.connection;
     PreparedStatement statement = conn.prepareStatement(sql);

@@ -95,12 +95,14 @@ public class CustomersSQL {
         }
     }
 
-    public static Customers getCustomer(int customerID) throws SQLException {
-        String sql = "Select * from customers where Customer_ID = '" + customerID + "'";
+    //get customer name from customer ID
+    public static Customers getCustomerName(int customerID) throws SQLException {
+        String sql = "Select * FROM customers WHERE Customer_ID = ?";
         Connection conn = JDBC.connection;
         PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, customerID);
         ResultSet result = statement.executeQuery();
-        if (result.next()) {
+        if (result.next()){
             Customers customer = new Customers(
                     result.getInt("Customer_ID"),
                     result.getString("Customer_Name"),
@@ -113,9 +115,11 @@ public class CustomersSQL {
                     result.getString("Last_Updated_By"),
                     result.getInt("Division_ID")
             );
+            System.out.println("Customer name retrieved successfully." + customer);
             return customer;
         }
         return null;
+
     }
 
 }

@@ -19,6 +19,8 @@ import models.appointmentscheduler.Users;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ModifyAppointmentController implements Initializable {
@@ -29,7 +31,6 @@ public class ModifyAppointmentController implements Initializable {
   public TextField appTitle;
   public TextField appDescription;
   public TextField appLocation;
-  public ComboBox appContactBox;
   public TextField appType;
 
   public DatePicker appStartDate;
@@ -40,6 +41,7 @@ public class ModifyAppointmentController implements Initializable {
   public ComboBox appEndTimeHours;
   public ComboBox appEndTimeMinutes;
 
+  public ComboBox appContactBox;
   public ComboBox appCustomerID;
   public ComboBox appUserID;
 
@@ -50,7 +52,96 @@ public class ModifyAppointmentController implements Initializable {
   }
 
 
-  public void appSaveButtonClick(ActionEvent actionEvent) {
+  public void appSaveButtonClick(ActionEvent actionEvent) throws SQLException {
+    // if anything is empty, throw an error
+    if (appTitle.getText().isEmpty() || appDescription.getText().isEmpty() || appLocation.getText().isEmpty() || appType.getText().isEmpty() || appStartDate.getValue() == null || appStartTimeHours.getValue() == null || appStartTimeMinutes.getValue() == null || appEndDate.getValue() == null || appEndTimeHours.getValue() == null || appEndTimeMinutes.getValue() == null || appContactBox.getValue() == null || appCustomerID.getValue() == null || appUserID.getValue() == null) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Please fill out all fields.");
+      alert.setContentText("Click OK to continue.");
+      alert.showAndWait();
+      return;
+    }
+    int tempID = Integer.parseInt(appID.getText());
+    String tempTitle = appTitle.getText();
+    String tempDescription = appDescription.getText();
+    String tempLocation = appLocation.getText();
+    int tempContactID = ((Contacts) appContactBox.getSelectionModel().getSelectedItem()).getContact_ID();
+    String tempType = appType.getText();
+    int tempCustomerID = ((Customers) appCustomerID.getSelectionModel().getSelectedItem()).getCustomer_ID();
+    int tempUserID = ((Users) appUserID.getSelectionModel().getSelectedItem()).getUser_ID();
+    LocalDateTime tempStart = appStartDate.getValue().atTime(Integer.parseInt(appStartTimeHours.getValue().toString()), Integer.parseInt(appStartTimeMinutes.getValue().toString()));
+    LocalDateTime tempEnd = appEndDate.getValue().atTime(Integer.parseInt(appEndTimeHours.getValue().toString()), Integer.parseInt(appEndTimeMinutes.getValue().toString()));
+
+    // if the start time is after the end time, throw an error
+    if (tempStart.isAfter(tempEnd)) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Start time cannot be after end time.");
+      alert.setContentText("Click OK to continue.");
+      alert.showAndWait();
+      return;
+    }
+    // If start and end time are not between 8am and 10pm
+    if (tempStart.getHour() < 8 || tempStart.getHour() > 22 || tempEnd.getHour() < 8 || tempEnd.getHour() > 22) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Start and end time must be between 8am and 10pm.");
+      alert.setContentText("Click OK to continue.");
+      alert.showAndWait();
+      return;
+    }
+    //If start and end date are in the same day and start time is after end time
+    if (tempStart.getDayOfYear() == tempEnd.getDayOfYear() && tempStart.isAfter(tempEnd)) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Start time cannot be after end time.");
+      alert.setContentText("Click OK to continue.");
+      alert.showAndWait();
+      return;
+    }
+    ObservableList<Appointments> tempAppointments = AppSQL.getAppointmentsContacts(tempContactID);
+    for (Appointments app : tempAppointments){
+      if (app.getStart().isBefore(tempStart) && app.getEnd().isAfter(tempStart) && app.getAppointment_ID() != tempID){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Contact is busy at this time.");
+        alert.setContentText("Click OK to continue.");
+        alert.showAndWait();
+        return;
+      }
+    }
+    //If ID is not empty add all to database
+    if (!appID.getText().isEmpty()) {
+      try {
+        AppSQL.updateAppointment(tempID, tempTitle, tempDescription, tempLocation, tempContactID, tempType, tempStart, tempEnd, tempCustomerID, tempUserID);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText("Appointment successfully updated.");
+        alert.setContentText("Click OK to continue.");
+        alert.showAndWait().ifPresent(rs -> {
+          if (rs == ButtonType.OK) {
+            try {
+              Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
+                .getWindow();
+              FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/jarod/appointmentscheduler/main.fxml")
+              );
+              Scene scene = new Scene(loader.load(), 1300, 650);
+              stage.setTitle("Appointment Scheduler");
+              stage.setScene(scene);
+              stage.show();
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        });
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+    }
+
 
   }
 
@@ -107,14 +198,22 @@ public class ModifyAppointmentController implements Initializable {
     appEndTimeMinutes.setItems(minutes);
 
     try {
-      appContactBox.getItems().addAll(ContactsSQL.getAllContacts());
-      appContactBox.setValue(ContactsSQL.getContact(selectedAppointment.getContact_ID()));
+      appContactBox.getItems().addAll(ContactsSQL.getAllContacts()); // works
+      appContactBox.setValue(ContactsSQL.getContactName(selectedAppointment.getContact_ID())); // works
+      //Test
+      System.out.println(ContactsSQL.getContactName(selectedAppointment.getContact_ID()));
+
 
       appCustomerID.getItems().addAll(CustomersSQL.getAllCustomers());
-      appCustomerID.setValue(CustomersSQL.getCustomer(selectedAppointment.getCustomer_ID()));//TODO: 4/26/2021 Fix this
+      appCustomerID.setValue(CustomersSQL.getCustomerName((selectedAppointment.getCustomer_ID())));
+      //Test
+      System.out.println(selectedAppointment.getCustomer_ID()); //TODO: Fix, only shows customer_ID not customer name
+
 
       appUserID.getItems().addAll(UserSQL.getAllUsers());
-      appUserID.setValue(UserSQL.getUser(selectedAppointment.getUser_ID())); // TODO: 4/26/2021 Fix this
+
+      appUserID.setValue(UserSQL.getUser(selectedAppointment.getUser_ID())); // TODO: 4/26/2021 Fix this only shows user_ID not user name
+
     } catch (SQLException e) {
       throw new RuntimeException(e);
     } catch (Exception e) {

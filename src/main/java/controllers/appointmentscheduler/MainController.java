@@ -289,6 +289,7 @@ public class MainController implements Initializable {
     } else {
       try {
         ModifyAppointmentController.retrieveAppointments(selectedAppointment);
+
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
           .getWindow();
         FXMLLoader loader = new FXMLLoader(

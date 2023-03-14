@@ -21,7 +21,7 @@
                <children>
                   <StackPane prefHeight="44.0" prefWidth="598.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Appointment" underline="true">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Appointment" underline="true">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
