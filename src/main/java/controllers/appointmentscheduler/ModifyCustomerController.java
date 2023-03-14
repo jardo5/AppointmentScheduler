@@ -1,6 +1,7 @@
 package controllers.appointmentscheduler;
 
 import database.appointmentscheduler.CountriesSQL;
+import database.appointmentscheduler.CustomersSQL;
 import database.appointmentscheduler.DivisionSQL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,56 @@ public class ModifyCustomerController implements Initializable {
     modifyCustomer = customers;
   }
 
-  public void custSaveButtonClick(ActionEvent actionEvent) {}
+  public void custSaveButtonClick(ActionEvent actionEvent) {
+    int custID = Integer.parseInt(this.custID.getText());
+    String custName = this.custName.getText();
+    String custAddress = this.custAddress.getText();
+    String custZipCode = this.custZipCode.getText();
+    String custPhoneNumber = this.custPhoneNumber.getText();
+    String custCountry = this.custCountryBox.getSelectionModel().getSelectedItem().toString();
+    String custDivision = this.custDivisionBox.getSelectionModel().getSelectedItem().toString();
+
+    if (custID == 0 || custName.isEmpty() || custAddress.isEmpty() || custZipCode.isEmpty() || custPhoneNumber.isEmpty() || custCountry.isEmpty() || custDivision.isEmpty()) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Please fill out all fields.");
+      alert.showAndWait();
+      return;
+    }
+    if (custPhoneNumber.length() != 10) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Please enter a valid phone number.");
+      alert.showAndWait();
+      return;
+    }
+    if (custZipCode.length() != 5) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Please enter a valid zip code.");
+      alert.showAndWait();
+      return;
+    }
+
+    CustomersSQL.updateCustomer(custID, custName, custAddress, custZipCode, custPhoneNumber, custCountry, custDivision);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Success");
+    alert.setHeaderText("Customer added successfully.");
+    alert.showAndWait().ifPresent(rs -> {
+      if (rs == ButtonType.OK) {
+        try {
+          Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/jarod/appointmentscheduler/main.fxml"));
+          Scene scene = new Scene(loader.load(), 1300, 650);
+          stage.setTitle("Appointment Scheduler");
+          stage.setScene(scene);
+          stage.show();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
 
   public void custCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -60,9 +110,19 @@ public class ModifyCustomerController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    custID.setText(String.valueOf(modifyCustomer.getCustomer_ID()));
+    custName.setText(modifyCustomer.getCustomer_Name());
+    custAddress.setText(modifyCustomer.getAddress());
+    custZipCode.setText(modifyCustomer.getPostal_Code());
+    custPhoneNumber.setText(modifyCustomer.getPhone());
+    custCountryBox.getSelectionModel();
+    custDivisionBox.getSelectionModel();
     try {
       custCountryBox.getItems().addAll(CountriesSQL.getAllCountriesName());
       custDivisionBox.getItems().addAll(DivisionSQL.getAllDivisionNames());
+
+      custCountryBox.setValue(DivisionSQL.getDivisionName(modifyCustomer.getDivision_ID()));
+      custDivisionBox.setValue(CountriesSQL.getCountryName((Integer) CountriesSQL.findCountryID(modifyCustomer.getDivision_ID())));
     } catch (SQLException e) {
       throw new RuntimeException(e);
     } catch (Exception e) {

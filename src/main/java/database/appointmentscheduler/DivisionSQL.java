@@ -16,9 +16,7 @@ public class DivisionSQL {
         PreparedStatement statement = JDBC.connection.prepareStatement(sql);
         statement.setString(1, divisionName);
         ResultSet result = statement.executeQuery();
-        if (!result.next()) {
-            throw new Exception("No results found for division name: " + divisionName);
-        }
+        result.next();
         return result.getInt("Division_ID");
     }
 
@@ -41,6 +39,19 @@ public class DivisionSQL {
             divisionList.add(division);
         }
         return divisionList;
+    }
+
+    public static Object getDivisionName(int divisionId) throws SQLException {
+        String sql = "SELECT Division FROM first_level_divisions WHERE Division_ID = ?";
+        Connection conn = JDBC.connection;
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, divisionId);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            String division = result.getString("Division");
+            return division;
+        }
+        return null;
     }
 
 }

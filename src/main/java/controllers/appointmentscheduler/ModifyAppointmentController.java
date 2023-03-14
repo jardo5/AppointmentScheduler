@@ -20,6 +20,7 @@ import models.appointmentscheduler.Users;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -71,8 +72,9 @@ public class ModifyAppointmentController implements Initializable {
     String tempType = appType.getText();
     int tempCustomerID = ((Customers) appCustomerID.getSelectionModel().getSelectedItem()).getCustomer_ID();
     int tempUserID = ((Users) appUserID.getSelectionModel().getSelectedItem()).getUser_ID();
-    LocalDateTime tempStart = appStartDate.getValue().atTime(Integer.parseInt(appStartTimeHours.getValue().toString()), Integer.parseInt(appStartTimeMinutes.getValue().toString()));
-    LocalDateTime tempEnd = appEndDate.getValue().atTime(Integer.parseInt(appEndTimeHours.getValue().toString()), Integer.parseInt(appEndTimeMinutes.getValue().toString()));
+    LocalDateTime tempStart = LocalDateTime.of(appStartDate.getValue(), LocalTime.parse(appStartTimeHours.getValue() + ":" + appStartTimeMinutes.getValue()));
+    LocalDateTime tempEnd = LocalDateTime.of(appEndDate.getValue(), LocalTime.parse(appEndTimeHours.getValue() + ":" + appEndTimeMinutes.getValue()));
+
 
     // if the start time is after the end time, throw an error
     if (tempStart.isAfter(tempEnd)) {
@@ -206,11 +208,10 @@ public class ModifyAppointmentController implements Initializable {
 
 
       appCustomerID.getItems().addAll(CustomersSQL.getAllCustomers()); // works
-        appCustomerID.setValue(CustomersSQL.getCustomer(selectedAppointment.getCustomer_ID())); // works
+      appCustomerID.setValue(CustomersSQL.getCustomer(selectedAppointment.getCustomer_ID())); // works
 
       //Test
       System.out.println(selectedAppointment.getCustomer_ID()); //TODO: Fix, only shows customer_ID not customer name
-
 
       appUserID.getItems().addAll(UserSQL.getAllUsers());
 

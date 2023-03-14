@@ -71,8 +71,8 @@ public class CustomersSQL {
     }
 
     public static void updateCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber, String custCountry, String custDivision) {
+        Connection conn = JDBC.connection;
         try {
-            Connection conn = JDBC.connection;
             String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = NOW(), Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, custName);
@@ -118,5 +118,18 @@ public class CustomersSQL {
             return customer;
         }
         return null;
+    }
+
+    public static void deleteCustomer(int customerId) {
+        try {
+            Connection conn = JDBC.connection;
+            String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, customerId);
+            statement.executeUpdate();
+            System.out.println("Customer deleted successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error deleting customer: " + e.getMessage());
+        }
     }
 }

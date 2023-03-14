@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -48,4 +49,13 @@ public class CountriesSQL {
         }
         return null;
     }
+
+    public static Object getCountryName(int countryID) throws SQLException {
+        String sql = "SELECT Country from countries where Country_ID = '" + countryID + "'";
+        Connection conn = JDBC.connection;
+        ResultSet result = conn.createStatement().executeQuery(sql);
+        result.next();
+        return result.getString("Country");
+    }
+
 }

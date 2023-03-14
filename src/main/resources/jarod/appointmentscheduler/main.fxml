@@ -66,7 +66,7 @@
                            <children>
                               <Button id="addButton" fx:id="addAppButton" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#addAppButtonClick" text="Add" />
                               <Button id="modifyButton" fx:id="modifyAppButton" layoutX="61.0" layoutY="4.0" mnemonicParsing="false" onAction="#appModifyButtonClick" text="Modify" />
-                              <Button id="deleteButton" layoutX="1240.0" layoutY="6.0" mnemonicParsing="false" text="Delete" />
+                              <Button id="deleteButton" layoutX="1240.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickDeleteApp" text="Delete" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -107,7 +107,7 @@
                            <children>
                               <Button id="addButton" fx:id="addCustButton" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#addCustButtonClick" text="Add" />
                               <Button id="modifyButton" fx:id="modifyCustButton" layoutX="59.0" layoutY="4.0" mnemonicParsing="false" onAction="#modifyCustButtonClick" text="Modify" />
-                              <Button id="deleteButton" layoutX="1240.0" layoutY="4.0" mnemonicParsing="false" text="Delete" />
+                              <Button id="deleteButton" layoutX="1240.0" layoutY="4.0" mnemonicParsing="false" onAction="#onClickDeleteCust" text="Delete" />
                            </children>
                         </AnchorPane>
                      </children>

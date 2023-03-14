@@ -1,6 +1,7 @@
 package controllers.appointmentscheduler;
 
 import database.appointmentscheduler.AppSQL;
+import database.appointmentscheduler.CustomersSQL;
 import jarod.appointmentscheduler.MainApplication;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,32 +67,6 @@ public class MainController implements Initializable {
   public Button addCustButton;
   public Button modifyCustButton;
 
-  public static void appointmentNotification() {
-    try {
-      ObservableList<Appointments> appointmentList = getAllAppointments();
-      for (Appointments appointment : appointmentList) {
-        if (
-          appointment.getStart().isAfter(LocalDateTime.now()) &&
-          appointment.getStart().isBefore(LocalDateTime.now().plusMinutes(15))
-        ) {
-          Alert alert = new Alert(Alert.AlertType.INFORMATION);
-          alert.setTitle("Reminder");
-          alert.setHeaderText("Appointment Reminder");
-          alert.setContentText("You have an appointment in 15 minutes.");
-          alert.showAndWait();
-        } else {
-          Alert alert = new Alert(Alert.AlertType.INFORMATION);
-          alert.setTitle("Reminder");
-          alert.setHeaderText("Appointment Reminder");
-          alert.setContentText(
-            "You have no appointments in the next 15 minutes."
-          );
-        }
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
 
   public void radioWeekClick() throws SQLException {
     AppointmentsTable.setItems(AppSQL.getWeeklyAppointments());
@@ -324,8 +299,9 @@ public class MainController implements Initializable {
   }
 
   public void modifyCustButtonClick(ActionEvent actionEvent) {
+    Customers modifyCustomer = (Customers) CustomersTable.getSelectionModel().getSelectedItem();
+    ModifyCustomerController.getModifyCustomer(modifyCustomer);
     try {
-      ModifyCustomerController.getModifyCustomer(modifyCustomer);
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
         .getWindow();
       FXMLLoader loader = new FXMLLoader(
@@ -338,6 +314,60 @@ public class MainController implements Initializable {
       stage.show();
     } catch (Exception e) {
       e.printStackTrace();
+    }
+  }
+
+  public void onClickDeleteApp(ActionEvent actionEvent){
+    Appointments selectedAppointment = AppointmentsTable.getSelectionModel().getSelectedItem();
+    if (selectedAppointment != null) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Appointment");
+        alert.setHeaderText("Are you sure you want to delete this appointment?");
+        alert.setContentText("Click OK to delete.");
+        alert.showAndWait().ifPresent(rs -> {
+          if (rs == ButtonType.OK) {
+            System.out.println("Deleting Appointment");
+            AppSQL.deleteAppointment(selectedAppointment.getAppointment_ID());
+            try {
+              AppointmentsTable.setItems(getAllAppointments());
+            } catch (SQLException e) {
+              throw new RuntimeException(e);
+            }
+          }
+        });
+    } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("No Appointment Selected");
+        alert.setContentText("Please select an appointment to delete.");
+        alert.showAndWait();
+    }
+  }
+
+    public void onClickDeleteCust(ActionEvent actionEvent){
+      Customers selectedCustomer = (Customers) CustomersTable.getSelectionModel().getSelectedItem();
+      if (selectedCustomer != null) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Customer");
+        alert.setHeaderText("Are you sure you want to delete this customer?");
+        alert.setContentText("Click OK to delete.");
+        alert.showAndWait().ifPresent(rs -> {
+          if (rs == ButtonType.OK) {
+            System.out.println("Deleting Customer");
+            CustomersSQL.deleteCustomer(selectedCustomer.getCustomer_ID());
+            try {
+              CustomersTable.setItems(getAllCustomers());
+            } catch (SQLException e) {
+              throw new RuntimeException(e);
+            }
+          }
+        });
+      } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("No Customer Selected");
+        alert.setContentText("Please select a customer to delete.");
+        alert.showAndWait();
     }
   }
 }

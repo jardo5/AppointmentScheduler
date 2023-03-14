@@ -234,4 +234,16 @@ public class AppSQL {
       e.printStackTrace();
     }
   }
+
+    public static void deleteAppointment(int tempID) {
+        try {
+        Connection conn = JDBC.connection;
+        String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, tempID);
+        statement.executeUpdate();
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+    }
 }
