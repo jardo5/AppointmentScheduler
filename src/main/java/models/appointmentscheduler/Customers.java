@@ -14,6 +14,7 @@ public class Customers {
   private LocalDateTime Last_Update;
   private String Last_Updated_By;
   private int Division_ID;
+  private int Country_ID;
 
   public Customers(
     int customer_ID,

@@ -57,7 +57,7 @@ public class AddCustomerController implements Initializable {
             return;
         }
           //if  everything is valid, add the customer to the database
-        CustomersSQL.addCustomer(custID, custName, custAddress, custZipCode, custPhoneNumber, custCountry, custDivision);
+        CustomersSQL.addCustomer(custID, custName, custAddress, custZipCode, custPhoneNumber, custDivision);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText("Customer added successfully.");

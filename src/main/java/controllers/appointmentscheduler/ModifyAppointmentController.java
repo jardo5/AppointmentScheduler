@@ -115,6 +115,15 @@ public class ModifyAppointmentController implements Initializable {
       }
     }
     //If ID is not empty add all to database
+    //if CustomerID and UserID are only 1 number throw error
+    if (appID.getText().isEmpty() || appCustomerID.getValue().toString().length() > 1){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Please Click an User and/or Customer");
+        alert.setContentText("Click OK to continue.");
+        alert.showAndWait();
+        return;
+    }
     if (!appID.getText().isEmpty()) {
       try {
         AppSQL.updateAppointment(tempID, tempTitle, tempDescription, tempLocation, tempContactID, tempType, tempStart, tempEnd, tempCustomerID, tempUserID);

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import models.appointmentscheduler.Customers;
 
 import java.net.URL;
@@ -31,38 +32,27 @@ public class ModifyCustomerController implements Initializable {
     modifyCustomer = customers;
   }
 
-  public void custSaveButtonClick(ActionEvent actionEvent) {
-    int custID = Integer.parseInt(this.custID.getText());
+  public void custSaveButtonClick(ActionEvent actionEvent) throws Exception {
+    int custID = modifyCustomer.getCustomer_ID();
     String custName = this.custName.getText();
     String custAddress = this.custAddress.getText();
     String custZipCode = this.custZipCode.getText();
     String custPhoneNumber = this.custPhoneNumber.getText();
     String custCountry = this.custCountryBox.getSelectionModel().getSelectedItem().toString();
-    String custDivision = this.custDivisionBox.getSelectionModel().getSelectedItem().toString();
 
-    if (custID == 0 || custName.isEmpty() || custAddress.isEmpty() || custZipCode.isEmpty() || custPhoneNumber.isEmpty() || custCountry.isEmpty() || custDivision.isEmpty()) {
+    int custDivision = DivisionSQL.getDivisionID(String.valueOf(custDivisionBox.getSelectionModel().getSelectedItem()));
+
+    System.out.println(custID + " " + custName + " " + custAddress + " " + custZipCode + " " + custPhoneNumber + " " + custCountry + " " + custDivision);
+
+    if (custName.isEmpty() || custAddress.isEmpty() || custZipCode.isEmpty() || custPhoneNumber.isEmpty() || custCountry.isEmpty() || custDivision == 0){
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
       alert.setHeaderText("Please fill out all fields.");
       alert.showAndWait();
       return;
     }
-    if (custPhoneNumber.length() != 10) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Error");
-      alert.setHeaderText("Please enter a valid phone number.");
-      alert.showAndWait();
-      return;
-    }
-    if (custZipCode.length() != 5) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Error");
-      alert.setHeaderText("Please enter a valid zip code.");
-      alert.showAndWait();
-      return;
-    }
 
-    CustomersSQL.updateCustomer(custID, custName, custAddress, custZipCode, custPhoneNumber, custCountry, custDivision);
+    CustomersSQL.updateCustomer(modifyCustomer.getCustomer_ID(), custName, custAddress, custZipCode, custPhoneNumber, custDivision);
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Success");
     alert.setHeaderText("Customer added successfully.");
@@ -119,10 +109,19 @@ public class ModifyCustomerController implements Initializable {
     custDivisionBox.getSelectionModel();
     try {
       custCountryBox.getItems().addAll(CountriesSQL.getAllCountriesName());
-      custDivisionBox.getItems().addAll(DivisionSQL.getAllDivisionNames());
 
-      custCountryBox.setValue(DivisionSQL.getDivisionName(modifyCustomer.getDivision_ID()));
-      custDivisionBox.setValue(CountriesSQL.getCountryName((Integer) CountriesSQL.findCountryID(modifyCustomer.getDivision_ID())));
+      // set the selected country for the customer
+      String divisionName = (String) DivisionSQL.getDivisionName(modifyCustomer.getDivision_ID());
+      custCountryBox.setValue(CountriesSQL.getCountryNameByDivision(divisionName));
+
+      // get the country ID based on the selected country name
+      int countryID = CountriesSQL.getCountryIDByDivision(divisionName);
+
+      // populate the division box based on the selected country
+      custDivisionBox.getItems().addAll(DivisionSQL.getDivisionNameByCountry(String.valueOf(countryID)));
+      custDivisionBox.setValue(DivisionSQL.getDivisionName(modifyCustomer.getDivision_ID()));
+
+
     } catch (SQLException e) {
       throw new RuntimeException(e);
     } catch (Exception e) {

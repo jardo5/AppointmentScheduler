@@ -11,10 +11,10 @@ import java.sql.SQLException;
 
 public class DivisionSQL {
 
-    public static int getDivisionID(String divisionName) throws Exception {
-        String sql = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
+    public static int getDivisionID(String divisionName) throws Exception, SQLException {
+        System.out.println("divisionName: " + divisionName);
+        String sql = "SELECT Division_ID from first_level_divisions where Division = '" + divisionName + "'";
         PreparedStatement statement = JDBC.connection.prepareStatement(sql);
-        statement.setString(1, divisionName);
         ResultSet result = statement.executeQuery();
         result.next();
         return result.getInt("Division_ID");
@@ -53,5 +53,19 @@ public class DivisionSQL {
         }
         return null;
     }
+
+    public static ObservableList<String> getDivisionNameByCountry(String countryId) throws SQLException {
+        ObservableList<String> divisionList = FXCollections.observableArrayList();
+        String sql = "SELECT Division FROM first_level_divisions WHERE Country_ID = ?";
+        Connection conn = JDBC.connection;
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, countryId);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            divisionList.add(result.getString("Division"));
+        }
+        return divisionList;
+    }
+
 
 }

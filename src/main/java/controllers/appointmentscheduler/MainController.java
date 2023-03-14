@@ -299,7 +299,9 @@ public class MainController implements Initializable {
   }
 
   public void modifyCustButtonClick(ActionEvent actionEvent) {
+
     Customers modifyCustomer = (Customers) CustomersTable.getSelectionModel().getSelectedItem();
+
     ModifyCustomerController.getModifyCustomer(modifyCustomer);
     try {
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()

@@ -1,6 +1,7 @@
 package database.appointmentscheduler;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +45,7 @@ public class CustomersSQL {
     return ++customerID;
   }
 
-  public static void addCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber, String custCountry, String custDivision) {
+  public static void addCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber,String custDivision) {
         try {
             Connection conn = JDBC.connection;
             String sql = "INSERT INTO customers VALUES (?, ?, ?, ?, ?, NOW(), ?, NOW(), ?, ?)";
@@ -70,30 +71,26 @@ public class CustomersSQL {
         }
     }
 
-    public static void updateCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber, String custCountry, String custDivision) {
+    public static void updateCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber, int custDivision) throws Exception {
         Connection conn = JDBC.connection;
-        try {
-            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = NOW(), Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, custName);
-            statement.setString(2, custAddress);
-            statement.setString(3, custZipCode);
-            statement.setString(4, custPhoneNumber);
-            statement.setString(5, UserSQL.getCurrentUser());
-            Integer divisionID = DivisionSQL.getDivisionID(custDivision);
-            if (divisionID == null) {
-                throw new Exception("Division ID not found for division: " + custDivision);
-            }
-            statement.setInt(6, divisionID);
-            statement.setInt(7, custID);
-            statement.executeUpdate();
-            System.out.println("Customer updated successfully.");
-        } catch (SQLException e) {
-            System.out.println("Error updating customer: " + e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        String sql = "Update Customers set Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Last_Update=?, Last_Updated_By=?, Division_ID=? WHERE Customer_ID=?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, custName);
+        statement.setString(2, custAddress);
+        statement.setString(3, custZipCode);
+        statement.setString(4, custPhoneNumber);
+        statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+        statement.setString(6, UserSQL.getCurrentUser());
+        statement.setInt(7, custDivision);
+        statement.setInt(8, custID);
+        statement.executeUpdate();
+
+
+
     }
+
+
+
 
 
     public static Customers getCustomer(int customerId) throws SQLException{
