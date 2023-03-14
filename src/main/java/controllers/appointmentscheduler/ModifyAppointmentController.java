@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ModifyAppointmentController implements Initializable {
   public Button appSaveButton;
@@ -204,8 +205,9 @@ public class ModifyAppointmentController implements Initializable {
       System.out.println(ContactsSQL.getContactName(selectedAppointment.getContact_ID()));
 
 
-      appCustomerID.getItems().addAll(CustomersSQL.getAllCustomers());
-      appCustomerID.setValue(CustomersSQL.getCustomerName((selectedAppointment.getCustomer_ID())));
+      appCustomerID.getItems().addAll(CustomersSQL.getAllCustomers()); // works
+        appCustomerID.setValue(CustomersSQL.getCustomer(selectedAppointment.getCustomer_ID())); // works
+
       //Test
       System.out.println(selectedAppointment.getCustomer_ID()); //TODO: Fix, only shows customer_ID not customer name
 
