@@ -38,9 +38,9 @@ public class Reports {
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             ReportCountry report = new ReportCountry(
-                    result.getInt("Count"),
-                    result.getString("Country")
-                        );
+                    result.getString("Country"),
+                    result.getInt("Count")
+                                    );
             reportList.add(report);
         }
         return reportList;
@@ -49,9 +49,30 @@ public class Reports {
     public static ObservableList<Appointments> getAppointmentsCustomer(int customerId) throws SQLException {
         ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM appointments WHERE Customer_ID = ?";
-        Query.createQuery(sql);
-        ResultSet result = Query.getResults();
-        return appointmentList;
+        Connection conn = JDBC.connection;
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, customerId);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            Appointments appointment = new Appointments(
+                    result.getInt("Appointment_ID"),
+                    result.getString("Title"),
+                    result.getString("Description"),
+                    result.getString("Location"),
+                    result.getString("Type"),
+                    result.getTimestamp("Start").toLocalDateTime(),
+                    result.getTimestamp("End").toLocalDateTime(),
+                    result.getTimestamp("Create_Date").toLocalDateTime(),
+                    result.getString("Created_By"),
+                    result.getTimestamp("Last_Update").toLocalDateTime(),
+                    result.getString("Last_Updated_By"),
+                    result.getInt("Customer_ID"),
+                    result.getInt("User_ID"),
+                    result.getInt("Contact_ID")
+            );
+            appointmentList.add(appointment);
+        }
 
+        return appointmentList;
     }
 }

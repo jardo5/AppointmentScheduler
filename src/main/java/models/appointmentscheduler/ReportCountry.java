@@ -1,27 +1,30 @@
 package models.appointmentscheduler;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class ReportCountry {
-    private int Country_Id;
-    private String Country;
+    private final SimpleStringProperty country;
+    private final SimpleIntegerProperty count;
 
-    public ReportCountry(int country_Id, String country){
-        this.Country_Id = country_Id;
-        this.Country = country;
-    }
-
-    public int getCountry_Id() {
-        return Country_Id;
-    }
-
-    public void setCountry_Id(int country_Id) {
-        Country_Id = country_Id;
+    public ReportCountry(String country, int count) {
+        this.country = new SimpleStringProperty(country);
+        this.count = new SimpleIntegerProperty(count);
     }
 
     public String getCountry() {
-        return Country;
+        return country.get();
     }
 
     public void setCountry(String country) {
-        Country = country;
+        this.country.set(country);
+    }
+
+    public int getCount() {
+        return count.get();
+    }
+
+    public void setCount(int count) {
+        this.count.set(count);
     }
 }
