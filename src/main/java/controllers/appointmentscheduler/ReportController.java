@@ -77,7 +77,7 @@ public class ReportController implements Initializable {
                     Contacts selectedContact = (Contacts) newValue;
                     int contactId = selectedContact.getContact_ID();
                     try {
-                        scheduleTable.setItems(Reports.getAppointmentsCustomer(contactId));
+                        scheduleTable.setItems(Reports.getAppointmentsByContact(contactId));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

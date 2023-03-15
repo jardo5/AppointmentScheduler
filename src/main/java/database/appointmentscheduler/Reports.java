@@ -15,7 +15,7 @@ public class Reports {
 
     public static ObservableList<ReportType> getAppTypeByMonth() throws SQLException {
         ObservableList<ReportType> reportList = FXCollections.observableArrayList();
-        String sql = "SELECT EXTRACT(YEAR_MONTH FROM Start) AS Month, Type, COUNT(*) as Count " + "FROM appointments " + "GROUP BY Month, Type";
+        String sql = "SELECT DATE_FORMAT(Start, '%Y-%m') AS Month, Type, COUNT(*) AS Count " + "FROM appointments " + "GROUP BY Month, Type " + "ORDER BY Month, Type";
         Connection conn = JDBC.connection;
         PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet result = statement.executeQuery();
@@ -46,12 +46,12 @@ public class Reports {
         return reportList;
     }
 
-    public static ObservableList<Appointments> getAppointmentsCustomer(int customerId) throws SQLException {
+    public static ObservableList<Appointments> getAppointmentsByContact(int contactId) throws SQLException {
         ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM appointments WHERE Customer_ID = ?";
+        String sql = "SELECT * FROM appointments WHERE Contact_ID = ?";
         Connection conn = JDBC.connection;
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setInt(1, customerId);
+        statement.setInt(1, contactId);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             Appointments appointment = new Appointments(
@@ -75,4 +75,5 @@ public class Reports {
 
         return appointmentList;
     }
+
 }
