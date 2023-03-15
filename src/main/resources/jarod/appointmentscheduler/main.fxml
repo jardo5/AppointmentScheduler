@@ -121,7 +121,7 @@
             <Font name="Fira Code Bold Nerd Font Complete Windows Compatible" size="18.0" />
          </font>
       </Text>
-      <Button id="reportsButton" layoutX="1167.0" layoutY="20.0" mnemonicParsing="false" text="Reports" />
+      <Button id="reportsButton" layoutX="1167.0" layoutY="20.0" mnemonicParsing="false" onAction="#reportButtonClick" text="Reports" />
       <Button id="logoutButton" fx:id="logoutButton" layoutX="1237.0" layoutY="20.0" mnemonicParsing="false" onAction="#logoutButtonClick" text="Logout" />
    </children>
 </AnchorPane>

@@ -204,7 +204,7 @@ public class MainController implements Initializable {
       FXMLLoader loader = new FXMLLoader(
         getClass().getResource("/jarod/appointmentscheduler/report.fxml")
       );
-      Scene scene = new Scene(loader.load(), 600, 300);
+      Scene scene = new Scene(loader.load(), 925, 550);
       stage.setTitle("Reports");
       stage.setScene(scene);
       stage.show();

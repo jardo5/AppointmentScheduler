@@ -6,10 +6,7 @@ import database.appointmentscheduler.CustomersSQL;
 import database.appointmentscheduler.UserSQL;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -49,8 +46,6 @@ public class AddAppointmentController implements Initializable {
   public Button appCancelButton;
 
   public void appSaveButtonClick(ActionEvent actionEvent) {
-
-
     int tempID = Integer.parseInt(appID.getText());
     String tempTitle = appTitle.getText();
     String tempDescription = appDescription.getText();
@@ -59,54 +54,54 @@ public class AddAppointmentController implements Initializable {
 
     try {
       LocalDateTime tempStart = appStartDate
-        .getValue()
-        .atTime(
-          Integer.parseInt(
-            appStartTimeHours
-              .getSelectionModel()
-              .getSelectedItem()
-              .toString()
-              .substring(0, 2)
-          ),
-          Integer.parseInt(
-            appStartTimeMinutes
-              .getSelectionModel()
-              .getSelectedItem()
-              .toString()
-              .substring(0, 2)
-          )
-        );
+              .getValue()
+              .atTime(
+                      Integer.parseInt(
+                              appStartTimeHours
+                                      .getSelectionModel()
+                                      .getSelectedItem()
+                                      .toString()
+                                      .substring(0, 2)
+                      ),
+                      Integer.parseInt(
+                              appStartTimeMinutes
+                                      .getSelectionModel()
+                                      .getSelectedItem()
+                                      .toString()
+                                      .substring(0, 2)
+                      )
+              );
 
       LocalDateTime tempEnd = appEndDate
-        .getValue()
-        .atTime(
-          Integer.parseInt(
-            appEndTimeHours
-              .getSelectionModel()
-              .getSelectedItem()
-              .toString()
-              .substring(0, 2)
-          ),
-          Integer.parseInt(
-            appEndTimeMinutes
-              .getSelectionModel()
-              .getSelectedItem()
-              .toString()
-              .substring(0, 2)
-          )
-        );
+              .getValue()
+              .atTime(
+                      Integer.parseInt(
+                              appEndTimeHours
+                                      .getSelectionModel()
+                                      .getSelectedItem()
+                                      .toString()
+                                      .substring(0, 2)
+                      ),
+                      Integer.parseInt(
+                              appEndTimeMinutes
+                                      .getSelectionModel()
+                                      .getSelectedItem()
+                                      .toString()
+                                      .substring(0, 2)
+                      )
+              );
       int tempCustomerID =
-        (
-          (Customers) appCustomerID.getSelectionModel().getSelectedItem()
-        ).getCustomer_ID();
+              (
+                      (Customers) appCustomerID.getSelectionModel().getSelectedItem()
+              ).getCustomer_ID();
       int tempUserID =
-        ((Users) appUserID.getSelectionModel().getSelectedItem()).getUser_ID();
+              ((Users) appUserID.getSelectionModel().getSelectedItem()).getUser_ID();
       int tempContactID = appContactBox.getSelectionModel().getSelectedItem() ==
-        null
-        ? -1
-        : (
-          (Contacts) appContactBox.getSelectionModel().getSelectedItem()
-        ).getContact_ID();
+              null
+              ? -1
+              : (
+              (Contacts) appContactBox.getSelectionModel().getSelectedItem()
+      ).getContact_ID();
 
       try {
         if (tempEnd.isBefore(tempStart) || tempEnd.isEqual(tempStart)) {
@@ -125,88 +120,69 @@ public class AddAppointmentController implements Initializable {
           alert.setTitle("Error");
           alert.setHeaderText("Invalid");
           alert.setContentText(
-            "Meeting must be between 8:00 AM and 10:00 PM EST."
+                  "Meeting must be between 8:00 AM and 10:00 PM EST."
           );
           alert.showAndWait();
           return;
         }
         if (
-          startEST.getHour() < 8 ||
-          startEST.getHour() >= 22 ||
-          endEST.getHour() < 8 ||
-          endEST.getHour() >= 22
+                startEST.getHour() < 8 ||
+                        startEST.getHour() >= 22 ||
+                        endEST.getHour() < 8 ||
+                        endEST.getHour() >= 22 ||
+                        startEST.getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
+                        startEST.getDayOfWeek().equals(DayOfWeek.SUNDAY) ||
+                        endEST.getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
+                        endEST.getDayOfWeek().equals(DayOfWeek.SUNDAY)
         ) {
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error");
           alert.setHeaderText("Invalid Time");
           alert.setContentText(
-            "The meeting time must be between 8:00 AM and 10:00 PM EST."
+                  "The meeting time must be between 8:00 AM and 10:00 PM EST, Monday through Friday."
           );
           alert.showAndWait();
           return;
         }
 
-        ObservableList<Appointments> custAppointments = AppSQL.getAppointmentsContacts(
-          tempContactID
-        );
+        ObservableList<Appointments> custAppointments = AppSQL.getAppointments(tempCustomerID);
         for (Appointments app : custAppointments) {
           LocalDateTime appStart = app.getStart();
           LocalDateTime appEnd = app.getEnd();
-          LocalDate appDate = appStart.toLocalDate();
-          LocalTime appStartTime = appStart.toLocalTime();
-          LocalTime appEndTime = appEnd.toLocalTime();
-          if (
-            tempContactID == app.getContact_ID() &&
-            appDate.equals(tempStart.toLocalDate())
-          ) {
-            if (
-              tempStart.toLocalTime().isAfter(appStartTime.minusMinutes(1)) &&
-              tempStart.toLocalTime().isBefore(appEndTime.plusMinutes(1))
-            ) {
-              Alert alert = new Alert(Alert.AlertType.ERROR);
-              alert.setTitle("Error");
-              alert.setHeaderText("Invalid");
-              alert.setContentText(
-                "Contact is already scheduled for another meeting during this time."
-              );
-              alert.showAndWait();
-              return;
-            }
-            if (
-              tempEnd.toLocalTime().isAfter(appStartTime.minusMinutes(1)) &&
-              tempEnd.toLocalTime().isBefore(appEndTime.plusMinutes(1))
-            ) {
-              Alert alert = new Alert(Alert.AlertType.ERROR);
-              alert.setTitle("Error");
-              alert.setHeaderText("Invalid");
-              alert.setContentText(
-                "Contact is already scheduled for another meeting during this time."
-              );
-              alert.showAndWait();
-              return;
-            }
+          if (tempID != app.getAppointment_ID() && (
+                  (tempStart.isAfter(appStart) && tempStart.isBefore(appEnd)) ||
+                          (tempEnd.isAfter(appStart) && tempEnd.isBefore(appEnd)) ||
+                          (tempStart.isBefore(appStart) && tempEnd.isAfter(appEnd)) ||
+                          (tempStart.isEqual(appStart) && tempEnd.isEqual(appEnd))
+          )) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid");
+            alert.setContentText("Customer already has an overlapping appointment.");
+            alert.showAndWait();
+            return;
           }
         }
 
         if (
-          tempTitle != "" &&
-          tempDescription != "" &&
-          tempLocation != "" &&
-          tempType != "" &&
-          tempStart != null &&
-          tempEnd != null
+                tempTitle != "" &&
+                        tempDescription != "" &&
+                        tempLocation != "" &&
+                        tempType != "" &&
+                        tempStart != null &&
+                        tempEnd != null
         ) {
           AppSQL.addAppointment(
-            tempID,
-            tempTitle,
-            tempDescription,
-            tempLocation,
-            tempContactID,
-            tempType,
-            tempStart,
-            tempEnd,
-            tempCustomerID,
-            tempUserID
+                  tempID,
+                  tempTitle,
+                  tempDescription,
+                  tempLocation,
+                  tempContactID,
+                  tempType,
+                  tempStart,
+                  tempEnd,
+                  tempCustomerID,
+                  tempUserID
           );
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
           alert.setTitle("Success");
@@ -214,9 +190,9 @@ public class AddAppointmentController implements Initializable {
           alert.setContentText("Appointment has been added to the database.");
           alert.showAndWait();
           Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
-            .getWindow();
+                  .getWindow();
           FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/jarod/appointmentscheduler/main.fxml")
+                  getClass().getResource("/jarod/appointmentscheduler/main.fxml")
           );
           Scene scene = new Scene(loader.load());
           stage.setScene(scene);
@@ -241,6 +217,8 @@ public class AddAppointmentController implements Initializable {
       return;
     }
   }
+
+
 
   public void appCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -21,6 +21,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -53,9 +55,18 @@ public class ModifyAppointmentController implements Initializable {
     selectedAppointment = appointments;
   }
 
+  private Customers getCustomerById(int id) throws SQLException {
+    for (Customers customer : CustomersSQL.getAllCustomers()) {
+      if (customer.getCustomer_ID() == id) {
+        return customer;
+      }
+    }
+    return null;
+  }
+
 
   public void appSaveButtonClick(ActionEvent actionEvent) throws SQLException {
-    // if anything is empty, throw an error
+
     if (appTitle.getText().isEmpty() || appDescription.getText().isEmpty() || appLocation.getText().isEmpty() || appType.getText().isEmpty() || appStartDate.getValue() == null || appStartTimeHours.getValue() == null || appStartTimeMinutes.getValue() == null || appEndDate.getValue() == null || appEndTimeHours.getValue() == null || appEndTimeMinutes.getValue() == null || appContactBox.getValue() == null || appCustomerID.getValue() == null || appUserID.getValue() == null) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
@@ -70,13 +81,15 @@ public class ModifyAppointmentController implements Initializable {
     String tempLocation = appLocation.getText();
     int tempContactID = ((Contacts) appContactBox.getSelectionModel().getSelectedItem()).getContact_ID();
     String tempType = appType.getText();
-    int tempCustomerID = ((Customers) appCustomerID.getSelectionModel().getSelectedItem()).getCustomer_ID();
-    int tempUserID = ((Users) appUserID.getSelectionModel().getSelectedItem()).getUser_ID();
+    int tempCustomerID = Integer.parseInt(appCustomerID.getValue().toString().split(" - ")[0]);
+    int tempUserID = Integer.parseInt(appUserID.getValue().toString().split(" - ")[0]);
     LocalDateTime tempStart = LocalDateTime.of(appStartDate.getValue(), LocalTime.parse(appStartTimeHours.getValue() + ":" + appStartTimeMinutes.getValue()));
     LocalDateTime tempEnd = LocalDateTime.of(appEndDate.getValue(), LocalTime.parse(appEndTimeHours.getValue() + ":" + appEndTimeMinutes.getValue()));
 
+    ZoneId estZoneId = ZoneId.of("America/New_York");
+    ZonedDateTime tempStartEST = tempStart.atZone(ZoneId.systemDefault()).withZoneSameInstant(estZoneId);
+    ZonedDateTime tempEndEST = tempEnd.atZone(ZoneId.systemDefault()).withZoneSameInstant(estZoneId);
 
-    // if the start time is after the end time, throw an error
     if (tempStart.isAfter(tempEnd)) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
@@ -85,45 +98,33 @@ public class ModifyAppointmentController implements Initializable {
       alert.showAndWait();
       return;
     }
-    // If start and end time are not between 8am and 10pm
-    if (tempStart.getHour() < 8 || tempStart.getHour() > 22 || tempEnd.getHour() < 8 || tempEnd.getHour() > 22) {
+    // If start and end time are not between 8am and 10pm EST
+    if (tempStartEST.getHour() < 8 || tempStartEST.getHour() >= 22 || tempEndEST.getHour() < 8 || tempEndEST.getHour() >= 22) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error");
-      alert.setHeaderText("Start and end time must be between 8am and 10pm.");
+      alert.setHeaderText("Start and end time must be between 8am and 10pm EST.");
       alert.setContentText("Click OK to continue.");
       alert.showAndWait();
       return;
     }
-    //If start and end date are in the same day and start time is after end time
-    if (tempStart.getDayOfYear() == tempEnd.getDayOfYear() && tempStart.isAfter(tempEnd)) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Error");
-      alert.setHeaderText("Start time cannot be after end time.");
-      alert.setContentText("Click OK to continue.");
-      alert.showAndWait();
-      return;
-    }
-    ObservableList<Appointments> tempAppointments = AppSQL.getAppointmentsContacts(tempContactID);
-    for (Appointments app : tempAppointments){
-      if (app.getStart().isBefore(tempStart) && app.getEnd().isAfter(tempStart) && app.getAppointment_ID() != tempID){
+
+    ObservableList<Appointments> customerAppointments = AppSQL.getAppointments(tempCustomerID);
+    for (Appointments app : customerAppointments) {
+      if (tempID != app.getAppointment_ID() && (
+              (tempStart.isAfter(app.getStart()) && tempStart.isBefore(app.getEnd())) ||
+                      (tempEnd.isAfter(app.getStart()) && tempEnd.isBefore(app.getEnd())) ||
+                      (tempStart.isBefore(app.getStart()) && tempEnd.isAfter(app.getEnd())) ||
+                      (tempStart.isEqual(app.getStart()) && tempEnd.isEqual(app.getEnd()))
+      )) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Contact is busy at this time.");
+        alert.setHeaderText("Overlapping appointments for customer.");
         alert.setContentText("Click OK to continue.");
         alert.showAndWait();
         return;
       }
     }
-    //If ID is not empty add all to database
-    //if CustomerID and UserID are only 1 number throw error
-    if (appID.getText().isEmpty() || appCustomerID.getValue().toString().length() > 1){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Please Click an User and/or Customer");
-        alert.setContentText("Click OK to continue.");
-        alert.showAndWait();
-        return;
-    }
+
     if (!appID.getText().isEmpty()) {
       try {
         AppSQL.updateAppointment(tempID, tempTitle, tempDescription, tempLocation, tempContactID, tempType, tempStart, tempEnd, tempCustomerID, tempUserID);
@@ -135,9 +136,9 @@ public class ModifyAppointmentController implements Initializable {
           if (rs == ButtonType.OK) {
             try {
               Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
-                .getWindow();
+                      .getWindow();
               FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/jarod/appointmentscheduler/main.fxml")
+                      getClass().getResource("/jarod/appointmentscheduler/main.fxml")
               );
               Scene scene = new Scene(loader.load(), 1300, 650);
               stage.setTitle("Appointment Scheduler");
@@ -151,13 +152,11 @@ public class ModifyAppointmentController implements Initializable {
       } catch (Exception e) {
         e.printStackTrace();
       }
-
     }
-
-
   }
 
-  public void appCancelButtonClick(ActionEvent actionEvent) {
+
+    public void appCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Cancel");
     alert.setHeaderText("Are you sure you want to cancel?");
@@ -216,15 +215,19 @@ public class ModifyAppointmentController implements Initializable {
       System.out.println(ContactsSQL.getContactName(selectedAppointment.getContact_ID()));
 
 
-      appCustomerID.getItems().addAll(CustomersSQL.getAllCustomers()); // works
-      appCustomerID.setValue(CustomersSQL.getCustomer(selectedAppointment.getCustomer_ID())); // works
+      for (Customers customer : CustomersSQL.getAllCustomers()) {
+        appCustomerID.getItems().add(customer.getCustomer_ID() + " - " + customer.getCustomer_Name());
+      }
+
 
       //Test
       System.out.println(selectedAppointment.getCustomer_ID()); //TODO: Fix, only shows customer_ID not customer name
 
-      appUserID.getItems().addAll(UserSQL.getAllUsers());
+      for (Users user : UserSQL.getAllUsers()){
+        appUserID.getItems().add(Users.getUser_ID() + " - " + Users.getUser_Name());
+      }
 
-      appUserID.setValue(UserSQL.getUser(selectedAppointment.getUser_ID())); // TODO: 4/26/2021 Fix this only shows user_ID not user name
+      System.out.println(selectedAppointment.getUser_ID()); //TODO: Fix, only shows user_ID not user name
 
     } catch (SQLException e) {
       throw new RuntimeException(e);

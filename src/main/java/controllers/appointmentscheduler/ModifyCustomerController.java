@@ -28,6 +28,7 @@ public class ModifyCustomerController implements Initializable {
 
   public static Customers modifyCustomer = null;
 
+
   public static void getModifyCustomer(Customers customers){
     modifyCustomer = customers;
   }

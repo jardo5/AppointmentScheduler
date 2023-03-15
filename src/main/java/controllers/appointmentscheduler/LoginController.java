@@ -14,7 +14,11 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,9 +60,10 @@ public class LoginController implements Initializable {
         stage.show();
 
         //Alert if an appointment is within 15 minutes
-        scheduleAlert();
+        checkAppointmentsWithin15Minutes();
+        System.out.println("Current time: " + LocalDateTime.now());
 
-        //login_activity success attempt
+        //login_activity successful attempt
         System.out.println("Successful username or password add to login_activity.txt");
         PrintWriter pw = new PrintWriter( new FileOutputStream(("src/main/java/login_activity.txt"),true));
         pw.append("Success: User: " + loggedUser.getUser_Name() + " logged in at " + LocalDateTime.now() + ".\n");
@@ -99,31 +104,42 @@ public class LoginController implements Initializable {
       });
   }
 
-  public static void scheduleAlert() throws SQLException {
+
+  public static void checkAppointmentsWithin15Minutes() throws SQLException {
     ObservableList<Appointments> allAppointments = AppSQL.getAllAppointments();
     ObservableList<Appointments> fifteenMinAppointments = FXCollections.observableArrayList();
+
     // Get all appointments within 15 minutes
-    //alert if appointment is within 15 minutes or not
     for (Appointments appointment : allAppointments) {
       if (appointment.getStart().isBefore(LocalDateTime.now().plusMinutes(15)) && appointment.getStart().isAfter(LocalDateTime.now())) {
         fifteenMinAppointments.add(appointment);
       }
     }
+
     if (fifteenMinAppointments.size() > 0) {
+      StringBuilder sb = new StringBuilder();
+      for (Appointments appointment : fifteenMinAppointments) {
+        sb.append("Appointment ID: ").append(appointment.getAppointment_ID())
+                .append(", Date: ").append(appointment.getStart().toLocalDate())
+                .append(", Time: ").append(appointment.getStart().toLocalTime())
+                .append("\n");
+      }
+
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Appointment Alert");
-      alert.setHeaderText("There is an appintment within 15 minutes");
-      alert.setContentText("There are " + fifteenMinAppointments.size() + " appointments within 15 minutes");
+      alert.setHeaderText("There is an appointment within 15 minutes");
+      alert.setContentText("Upcoming appointments:\n" + sb.toString());
       alert.showAndWait();
     } else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Appointment Alert");
-        alert.setHeaderText("There are no appointments within 15 minutes");
-        alert.setContentText("There are " + fifteenMinAppointments.size() + " appointments within 15 minutes");
-        alert.showAndWait();
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Appointment Alert");
+      alert.setHeaderText("There are no appointments within 15 minutes");
+      alert.setContentText("You have no upcoming appointments within the next 15 minutes.");
+      alert.showAndWait();
     }
-
   }
+
+
 
   private ResourceBundle Language;
   ZoneId zoneId = ZoneId.systemDefault();

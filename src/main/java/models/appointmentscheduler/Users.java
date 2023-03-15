@@ -6,7 +6,7 @@ public class Users {
 
   private static Users loggedUser;
 
-  private int User_ID;
+  private static int User_ID;
   private static String User_Name;
   private String Password;
   private LocalDateTime Create_Date;
@@ -23,7 +23,7 @@ public class Users {
     Users.loggedUser = loggedUser;
   }
 
-  public int getUser_ID() {
+  public static int getUser_ID() {
     return User_ID;
   }
 
