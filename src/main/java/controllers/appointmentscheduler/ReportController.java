@@ -69,7 +69,7 @@ public class ReportController implements Initializable {
         try {
 
 
-            contactComboBox.getItems().addAll(ContactsSQL.getAllContacts());
+            contactComboBox.setItems(ContactsSQL.getAllContacts());
 
             contactComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 System.out.println("Selected item: " + newValue);
@@ -78,16 +78,16 @@ public class ReportController implements Initializable {
                     int contactId = selectedContact.getContact_ID();
                     try {
                         scheduleTable.setItems(Reports.getAppointmentsCustomer(contactId));
-                        scheduleAppID.setCellValueFactory(new PropertyValueFactory<>("appointment_ID"));
-                        scheduleTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-                        scheduleType.setCellValueFactory(new PropertyValueFactory<>("type"));
-                        scheduleDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-                        scheduleStart.setCellValueFactory(new PropertyValueFactory<>("start"));
-                        scheduleEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
-                        scheduleCustomerID.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+                    scheduleAppID.setCellValueFactory(new PropertyValueFactory<>("appointment_ID"));
+                    scheduleTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+                    scheduleType.setCellValueFactory(new PropertyValueFactory<>("type"));
+                    scheduleDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+                    scheduleStart.setCellValueFactory(new PropertyValueFactory<>("start"));
+                    scheduleEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
+                    scheduleCustomerID.setCellValueFactory(new PropertyValueFactory<>("customer_ID"));
                 }
             });
 
