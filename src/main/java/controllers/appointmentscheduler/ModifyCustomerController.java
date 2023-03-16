@@ -177,6 +177,17 @@ public class ModifyCustomerController implements Initializable {
       custDivisionBox.getItems().addAll(DivisionSQL.getDivisionNameByCountry(String.valueOf(countryID)));
       custDivisionBox.setValue(divisionName);
 
+
+      /**
+       * Lambda Expression 2
+       * Makes code more readable and easier to understand. As well as more efficient.
+       * custCountryBox ComboBox selection changes, updating custDivisionBox accordingly.
+       *
+       * Sets a listener on the custCountryBox ComboBox to update the custDivisionBox ComboBox.
+       * Whenever a new country is selected, the divisions associated with the selected country
+       * are fetched from the database and displayed in the custDivisionBox ComboBox.
+       */
+
       custCountryBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue != null) {
           try {
