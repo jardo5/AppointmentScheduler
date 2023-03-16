@@ -39,18 +39,21 @@ public class CountriesSQL {
      * @throws SQLException
      */
 
-    public static int getCountryIDByDivision(String divisionName) {
-        String sql = "SELECT Country_ID from first_level_divisions where Division = '" + divisionName + "'";
+    public static int getCountryIDByDivision(String countryName) {
+        String sql = "SELECT Country_ID from countries where Country = ?";
         try {
             PreparedStatement statement = JDBC.connection.prepareStatement(sql);
+            statement.setString(1, countryName);
             ResultSet result = statement.executeQuery();
-            result.next();
-            return result.getInt("Country_ID");
+            if (result.next()) {
+                return result.getInt("Country_ID");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
     }
+
 
     /**
      * Get Country Name by Division Name

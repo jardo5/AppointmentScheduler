@@ -136,6 +136,8 @@ public class AddCustomerController implements Initializable {
             custID.setText(String.valueOf(CustomersSQL.autoCustomerID()));
             custCountryBox.setItems(CountriesSQL.getAllCountriesName());
             custDivisionBox.setItems(DivisionSQL.getAllDivisionNames());
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (Exception e) {

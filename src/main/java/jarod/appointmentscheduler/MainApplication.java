@@ -38,7 +38,4 @@ public class MainApplication extends Application {
   }
 }
 
-// TODO: Remove Unused Imports
-//TODO: Remove unnecessary comments
-//TODO: Remove unused variables/methods
-//TODO: JavaDoc
+//TODO fix country ModifyCustomerController

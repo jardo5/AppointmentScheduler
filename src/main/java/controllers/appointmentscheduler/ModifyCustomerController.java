@@ -87,7 +87,7 @@ public class ModifyCustomerController implements Initializable {
     String custPhoneNumber = this.custPhoneNumber.getText();
     String custCountry = this.custCountryBox.getSelectionModel().getSelectedItem().toString();
 
-    int custDivision = DivisionSQL.getDivisionID(String.valueOf(custDivisionBox.getSelectionModel().getSelectedItem()));
+    int custDivision = DivisionSQL.getDivisionID(custDivisionBox.getSelectionModel().getSelectedItem().toString());
 
     System.out.println(custID + " " + custName + " " + custAddress + " " + custZipCode + " " + custPhoneNumber + " " + custCountry + " " + custDivision);
 
@@ -119,7 +119,8 @@ public class ModifyCustomerController implements Initializable {
     });
   }
 
-    /**
+
+  /**
      * Cancels the modification of the customer
      * Exits back to the main screen
      * @param actionEvent action event
@@ -164,27 +165,38 @@ public class ModifyCustomerController implements Initializable {
     custAddress.setText(modifyCustomer.getAddress());
     custZipCode.setText(modifyCustomer.getPostal_Code());
     custPhoneNumber.setText(modifyCustomer.getPhone());
-    custCountryBox.getSelectionModel();
-    custDivisionBox.getSelectionModel();
+
     try {
       custCountryBox.getItems().addAll(CountriesSQL.getAllCountriesName());
 
-      // set the selected country for the customer
       String divisionName = (String) DivisionSQL.getDivisionName(modifyCustomer.getDivision_ID());
-      custCountryBox.setValue(CountriesSQL.getCountryNameByDivision(divisionName));
+      String countryName = (String) CountriesSQL.getCountryNameByDivision(divisionName);
+      custCountryBox.setValue(countryName);
 
-      // get the country ID based on the selected country name
       int countryID = CountriesSQL.getCountryIDByDivision(divisionName);
-
-      // populate the division box based on the selected country
       custDivisionBox.getItems().addAll(DivisionSQL.getDivisionNameByCountry(String.valueOf(countryID)));
-      custDivisionBox.setValue(DivisionSQL.getDivisionName(modifyCustomer.getDivision_ID()));
+      custDivisionBox.setValue(divisionName);
+
+      custCountryBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue != null) {
+          try {
+            custDivisionBox.getItems().clear();
+            int newCountryID = CountriesSQL.getCountryIDByDivision(newValue.toString());
+            custDivisionBox.getItems().addAll(DivisionSQL.getDivisionNameByCountry(String.valueOf(newCountryID)));
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+        }
+      });
 
 
     } catch (SQLException e) {
       throw new RuntimeException(e);
     } catch (Exception e) {
-        throw new RuntimeException(e);
+      throw new RuntimeException(e);
     }
   }
+
+
+
 }

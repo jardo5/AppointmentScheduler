@@ -147,6 +147,15 @@ public class ReportController implements Initializable {
 
             contactComboBox.setItems(ContactsSQL.getAllContacts());
 
+            /**
+             * Lambda Expression 1
+             * Updates the scheduleTable with appointments for the selected contact.
+             * Uses a lambda expression for a concise and readable event listener implementation
+             * on selectedItemProperty changes in contactComboBox.
+             */
+
+
+
             contactComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 System.out.println("Selected item: " + newValue);
                 if (newValue != null) {

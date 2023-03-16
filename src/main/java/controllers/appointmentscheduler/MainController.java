@@ -355,7 +355,15 @@ public class MainController implements Initializable {
     Customers modifyCustomer = (Customers) CustomersTable.getSelectionModel().getSelectedItem();
 
     ModifyCustomerController.getModifyCustomer(modifyCustomer);
+
     try {
+      if(modifyCustomer == null) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("No Customer Selected");
+        alert.setContentText("Please select a customer to modify.");
+        alert.showAndWait();
+      }
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
         .getWindow();
       FXMLLoader loader = new FXMLLoader(
