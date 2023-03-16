@@ -22,6 +22,10 @@ import models.appointmentscheduler.Contacts;
 import models.appointmentscheduler.Customers;
 import models.appointmentscheduler.Users;
 
+/**
+ * handles the logic of the Add Appointment screen
+ */
+
 public class AddAppointmentController implements Initializable {
 
   public TextField appID;
@@ -44,6 +48,12 @@ public class AddAppointmentController implements Initializable {
 
   public Button appSaveButton;
   public Button appCancelButton;
+
+  /**
+   * Saves the appointment to the database
+   * returns to the main screen
+   * @param actionEvent
+   */
 
   public void appSaveButtonClick(ActionEvent actionEvent) {
     int tempID = Integer.parseInt(appID.getText());
@@ -218,7 +228,10 @@ public class AddAppointmentController implements Initializable {
     }
   }
 
-
+  /**
+   * Exits the current window and returns to the main window.
+   * @param actionEvent
+   */
 
   public void appCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -245,6 +258,13 @@ public class AddAppointmentController implements Initializable {
         }
       });
   }
+
+  /**
+   * Populates combo boxes with hours and minues
+   * retrieves Customers and Contacts from the database to populate the combo boxes
+   * @param url
+   * @param resourceBundle
+   */
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {

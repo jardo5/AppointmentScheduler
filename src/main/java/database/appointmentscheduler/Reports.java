@@ -11,7 +11,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is the Class to hold the report queries
+ */
+
 public class Reports {
+
+    /**
+     * Get Appointments Type by Month
+     * @return reportList
+     * @throws SQLException
+     */
 
     public static ObservableList<ReportType> getAppTypeByMonth() throws SQLException {
         ObservableList<ReportType> reportList = FXCollections.observableArrayList();
@@ -30,6 +40,12 @@ public class Reports {
         return reportList;
     }
 
+    /**
+     * Get Customer count by Country
+     * @return reportList
+     * @throws SQLException
+     */
+
     public static ObservableList<ReportCountry> getCustomerCountByCountry() throws SQLException{
         ObservableList<ReportCountry> reportList = FXCollections.observableArrayList();
         String sql = "SELECT countries.Country, COUNT(*) as Count " + "FROM customers " + "INNER JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID " + "INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID " + "GROUP BY countries.Country";
@@ -45,6 +61,13 @@ public class Reports {
         }
         return reportList;
     }
+
+    /**
+     * Get Appointments by Contact
+     * @param contactId
+     * @return appointmentList
+     * @throws SQLException
+     */
 
     public static ObservableList<Appointments> getAppointmentsByContact(int contactId) throws SQLException {
         ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();

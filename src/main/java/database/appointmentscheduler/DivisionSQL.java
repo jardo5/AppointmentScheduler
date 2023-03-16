@@ -9,7 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is the Class to hold the Division queries
+ */
+
 public class DivisionSQL {
+
+    /**
+     * Get Division ID by Name
+     * @return divisionList
+     * @throws SQLException
+     */
 
     public static int getDivisionID(String divisionName) throws Exception, SQLException {
         System.out.println("divisionName: " + divisionName);
@@ -19,6 +29,12 @@ public class DivisionSQL {
         result.next();
         return result.getInt("Division_ID");
     }
+
+    /**
+     * Get Division Name by ID
+     * @return divisionList
+     * @throws SQLException
+     */
 
     public static ObservableList<Divisions> getAllDivisionNames() throws SQLException{
         ObservableList<Divisions> divisionList = FXCollections.observableArrayList();
@@ -41,6 +57,13 @@ public class DivisionSQL {
         return divisionList;
     }
 
+    /**
+     * Get Division Name by ID
+     * @param divisionId
+     * @return division
+     * @throws SQLException
+     */
+
     public static Object getDivisionName(int divisionId) throws SQLException {
         String sql = "SELECT Division FROM first_level_divisions WHERE Division_ID = ?";
         Connection conn = JDBC.connection;
@@ -53,6 +76,13 @@ public class DivisionSQL {
         }
         return null;
     }
+
+    /**
+     * Get Division Name by Country
+     * @param countryId
+     * @return divisionList
+     * @throws SQLException
+     */
 
     public static ObservableList<String> getDivisionNameByCountry(String countryId) throws SQLException {
         ObservableList<String> divisionList = FXCollections.observableArrayList();

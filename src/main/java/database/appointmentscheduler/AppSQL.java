@@ -9,7 +9,17 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import models.appointmentscheduler.Appointments;
 
+/**
+ * holds the Appointment queries
+ */
+
 public class AppSQL {
+
+    /**
+     * Get all appointments
+     * @return appointmentList
+     * @throws SQLException
+     */
 
   public static ObservableList<Appointments> getAllAppointments()
     throws SQLException {
@@ -43,6 +53,12 @@ public class AppSQL {
     }
     return appointmentList;
   }
+
+    /**
+     * Get all appointments by weekly
+     * @return appointmentList
+     * @throws SQLException
+     */
 
   public static ObservableList<Appointments> getWeeklyAppointments()
     throws SQLException {
@@ -78,6 +94,12 @@ public class AppSQL {
     return appointmentList;
   }
 
+    /**
+     * Get all appointments by monthly
+     * @return appointmentList
+     * @throws SQLException
+     */
+
   public static ObservableList<Appointments> getMonthlyAppointments()
     throws SQLException {
     Connection conn = JDBC.connection;
@@ -111,6 +133,12 @@ public class AppSQL {
     return appointmentList;
   }
 
+    /**
+     * Generate appointment ID
+     * @return appointmentList
+     * @throws SQLException
+     */
+
   public static int autoAppointmentID() throws SQLException {
     Connection conn = JDBC.connection;
     String sql = "SELECT MAX(Appointment_ID) FROM appointments";
@@ -122,6 +150,12 @@ public class AppSQL {
     }
     return ++appointmentID;
   }
+
+  /**
+   * Local Time to EST
+   * @param localDateTime
+   * @return
+   */
 
   public static LocalDateTime localToEST(LocalDateTime localDateTime) {
     ZonedDateTime localZDT = localDateTime.atZone(
@@ -135,36 +169,19 @@ public class AppSQL {
     return estDateTime;
   }
 
-  public static ObservableList<Appointments> getAppointmentsContacts(
-    int contactId
-  ) throws SQLException {
-    ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();
-    Connection conn = JDBC.connection;
-    String sql = "SELECT * FROM appointments WHERE Contact_ID = ?";
-    PreparedStatement statement = conn.prepareStatement(sql);
-    statement.setInt(1, contactId);
-    ResultSet result = statement.executeQuery();
-    while (result.next()) {
-      Appointments appointment = new Appointments(
-        result.getInt("Appointment_ID"),
-        result.getString("Title"),
-        result.getString("Description"),
-        result.getString("Location"),
-        result.getString("Type"),
-        result.getTimestamp("Start").toLocalDateTime(),
-        result.getTimestamp("End").toLocalDateTime(),
-        result.getTimestamp("Create_Date").toLocalDateTime(),
-        result.getString("Created_By"),
-        result.getTimestamp("Last_Update").toLocalDateTime(),
-        result.getString("Last_Updated_By"),
-        result.getInt("Customer_ID"),
-        result.getInt("User_ID"),
-        result.getInt("Contact_ID")
-      );
-      appointmentList.add(appointment);
-    }
-    return appointmentList;
-  }
+  /**
+   * Add appointment
+   * @param tempID
+   * @param tempTitle
+   * @param tempDescription
+   * @param tempLocation
+   * @param tempContactID
+   * @param tempType
+   * @param tempStart
+   * @param tempEnd
+   * @param tempCustomerID
+   * @param tempUserID
+   */
 
   public static void addAppointment(
     int tempID,
@@ -201,6 +218,20 @@ public class AppSQL {
     }
   }
 
+    /**
+     * Update appointment
+     * @param tempID
+     * @param tempTitle
+     * @param tempDescription
+     * @param tempLocation
+     * @param tempContactID
+     * @param tempType
+     * @param tempStart
+     * @param tempEnd
+     * @param tempCustomerID
+     * @param tempUserID
+     */
+
   public static void updateAppointment(
     int tempID,
     String tempTitle,
@@ -235,6 +266,11 @@ public class AppSQL {
     }
   }
 
+    /**
+     * Delete appointment
+     * @param tempID
+     */
+
     public static void deleteAppointment(int tempID) {
         try {
         Connection conn = JDBC.connection;
@@ -246,6 +282,13 @@ public class AppSQL {
         e.printStackTrace();
         }
     }
+
+    /**
+     * Get appointment by customer ID
+     * @param tempCustomerID
+     * @return appointment
+     * @throws SQLException
+     */
 
     public static ObservableList<Appointments> getAppointments(int tempCustomerID) {
         ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();

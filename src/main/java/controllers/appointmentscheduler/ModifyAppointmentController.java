@@ -27,43 +27,118 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * handles the logic of the Modify Appointment screen
+ */
+
 public class ModifyAppointmentController implements Initializable {
+
+    /**
+     * Appointment Save Button
+     */
   public Button appSaveButton;
+
+    /**
+     * Appointment Cancel Button
+     */
   public Button appCancelButton;
 
+    /**
+     * Appointment ID field
+     */
   public TextField appID;
+
+    /**
+     * Appointment Title field
+     */
   public TextField appTitle;
+
+    /**
+     * Appointment Description field
+     */
   public TextField appDescription;
+
+    /**
+     * Appointment Location field
+     */
   public TextField appLocation;
+
+    /**
+     * Appointment Type field
+     */
   public TextField appType;
 
+    /**
+     * Appointment Start Date field
+     */
+
   public DatePicker appStartDate;
+
+    /**
+     * Appointment Start Time Hours field
+     */
   public ComboBox appStartTimeHours;
+
+    /**
+     * Appointment Start Time Minutes field
+     */
   public ComboBox appStartTimeMinutes;
 
+    /**
+     * Appointment End Date field
+     */
   public DatePicker appEndDate;
+
+    /**
+     * Appointment End Time Hours field
+     */
   public ComboBox appEndTimeHours;
+
+    /**
+     * Appointment End Time Minutes field
+     */
   public ComboBox appEndTimeMinutes;
 
+    /**
+     * Appointment Contact Combo Box
+     */
+
   public ComboBox appContactBox;
+
+    /**
+     * Appointment Customer ID Combo Box
+     */
   public ComboBox appCustomerID;
+
+    /**
+     * Appointment User ID Combo Box
+     */
   public ComboBox appUserID;
 
+    /**
+     * Appointment Created By field
+     */
+
+  /**
+   * Allows to retrieve the selected appointment from the main screen
+   */
+
   private static Appointments selectedAppointment = null;
+
+  /**
+   * Retrieves the selected appointment from the main screen
+   * @param appointments
+   */
 
   public static void retrieveAppointments(Appointments appointments) {
     selectedAppointment = appointments;
   }
 
-  private Customers getCustomerById(int id) throws SQLException {
-    for (Customers customer : CustomersSQL.getAllCustomers()) {
-      if (customer.getCustomer_ID() == id) {
-        return customer;
-      }
-    }
-    return null;
-  }
-
+  /**
+   * On save click, saves the appointment to the database
+   * @param actionEvent save button click
+   * @throws SQLException if the database cannot be reached
+   */
 
   public void appSaveButtonClick(ActionEvent actionEvent) throws SQLException {
 
@@ -155,8 +230,13 @@ public class ModifyAppointmentController implements Initializable {
     }
   }
 
+  /**
+   * On cancel click, returns to the main screen
+   * @param actionEvent
+   */
 
-    public void appCancelButtonClick(ActionEvent actionEvent) {
+
+  public void appCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Cancel");
     alert.setHeaderText("Are you sure you want to cancel?");
@@ -182,6 +262,11 @@ public class ModifyAppointmentController implements Initializable {
       });
   }
 
+  /**
+   * Initializes and populates the comboboxes and text fields
+   * @param url
+   * @param resourceBundle
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     //Make a list of hours and a list of minutes for the combobox

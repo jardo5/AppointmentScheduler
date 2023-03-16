@@ -16,22 +16,68 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * handles the logic of the Modify Customer screen
+ */
+
 public class ModifyCustomerController implements Initializable {
 
+  /**
+   * Customer ID field
+   */
+
   public TextField custID;
+
+    /**
+     * Customer Name field
+     */
   public TextField custName;
+
+    /**
+     * Customer Address field
+     */
   public TextField custAddress;
+
+    /**
+     * Customer Zip Code field
+     */
   public TextField custZipCode;
+
+    /**
+     * Customer Phone Number field
+     */
   public TextField custPhoneNumber;
+
+    /**
+     * Customer Country Combo Box
+     */
   public ComboBox custCountryBox;
+
+    /**
+     * Customer Division Combo Box
+     */
   public ComboBox custDivisionBox;
 
+
+  /**
+   * Allows the passing of the selected customer from the main screen to this screen
+   */
   public static Customers modifyCustomer = null;
 
-
+  /**
+   * Allows the passing of the selected customer from the main screen to this screen
+   * @param customers selected customer
+   */
   public static void getModifyCustomer(Customers customers){
     modifyCustomer = customers;
   }
+
+  /**
+   * Saves the modified customer to the database
+   * Exits back to the main screen
+   * @param actionEvent save button click
+   * @throws Exception if the customer cannot be saved
+   */
 
   public void custSaveButtonClick(ActionEvent actionEvent) throws Exception {
     int custID = modifyCustomer.getCustomer_ID();
@@ -73,6 +119,12 @@ public class ModifyCustomerController implements Initializable {
     });
   }
 
+    /**
+     * Cancels the modification of the customer
+     * Exits back to the main screen
+     * @param actionEvent action event
+     */
+
   public void custCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Cancel");
@@ -98,6 +150,12 @@ public class ModifyCustomerController implements Initializable {
         }
       });
   }
+
+  /**
+   * Populates the fields and combo boxes with the selected customer's information
+   * @param url url
+   * @param resourceBundle  resource bundle
+   */
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {

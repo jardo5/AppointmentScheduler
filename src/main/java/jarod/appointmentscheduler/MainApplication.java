@@ -10,6 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Main, starts the application and connects to the database.
+ */
+
 public class MainApplication extends Application {
 
   @Override
@@ -33,3 +37,8 @@ public class MainApplication extends Application {
     JDBC.closeConnection();
   }
 }
+
+// TODO: Remove Unused Imports
+//TODO: Remove unnecessary comments
+//TODO: Remove unused variables/methods
+//TODO: JavaDoc

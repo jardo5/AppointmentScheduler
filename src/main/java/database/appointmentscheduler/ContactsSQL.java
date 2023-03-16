@@ -8,7 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.appointmentscheduler.Contacts;
 
+/**
+ * holds the Contact queries
+ */
+
 public class ContactsSQL {
+
+    /**
+     * Get all contacts
+     * @return contactList
+     * @throws SQLException
+     */
 
   public static ObservableList<Contacts> getAllContacts() throws SQLException {
     ObservableList<Contacts> contactList = FXCollections.observableArrayList();
@@ -26,6 +36,12 @@ public class ContactsSQL {
     }
     return contactList;
   }
+
+    /**
+     * Get contact by ID
+     * @return contact
+     * @throws SQLException
+     */
 
   public static Contacts getContactName(int contactID) throws SQLException {
     String sql = "SELECT * FROM contacts WHERE Contact_ID = ?";

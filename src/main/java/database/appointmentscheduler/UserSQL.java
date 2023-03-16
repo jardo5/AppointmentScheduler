@@ -8,23 +8,11 @@ import javafx.scene.control.Alert;
 import models.appointmentscheduler.Users;
 
 public class UserSQL {
-
-  public static Users retrieveUsers(int userId) throws SQLException {
-    String query = "SELECT * FROM users WHERE User_ID = ? LIMIT 1";
-    try (PreparedStatement statement = Query.createQuery(query);) {
-      statement.setInt(1, userId);
-      try (ResultSet result = statement.executeQuery()) {
-        if (result.next()) {
-          int resUserId = result.getInt("User_ID");
-          String resUserName = result.getString("User_Name");
-          Users queryResults = new Users(resUserId, resUserName);
-          return queryResults;
-        }
-        return null;
-      }
-    }
-  }
-
+  /**
+   * Gets all users from database
+   * @return allUsers
+   * @throws SQLException
+   */
   public static ObservableList<Users> getAllUsers() throws SQLException {
     ObservableList<Users> allUsers = FXCollections.observableArrayList();
     String query = "SELECT * FROM users";
@@ -40,6 +28,14 @@ public class UserSQL {
       }
     }
   }
+
+  /**
+   * Logs user into application. Checks if user exists in database and if password matches.
+   * @param userName Logged in userName
+   * @param password
+   * @return loggedUser
+   * @throws SQLException
+   */
 
   public static Users loggedUser(String userName, String password)
     throws SQLException {
@@ -68,21 +64,13 @@ public class UserSQL {
     return null;
   }
 
+  /**
+   * Gets current logged in user
+   * @return Users.getUser_Name()
+   */
+
   public static String getCurrentUser() {
     return Users.getUser_Name();
-  }
-
-  public static Users getUser(int Id) throws SQLException, Exception{
-    String sqlStatement = "SELECT * FROM users WHERE User_ID = '" + Id + "'";
-    Connection conn = JDBC.connection;
-    ResultSet result = conn.createStatement().executeQuery(sqlStatement);
-    if (result.next()) {
-      int resUserId = result.getInt("User_ID");
-      String resUserName = result.getString("User_Name");
-      Users queryResults = new Users(resUserId, resUserName);
-      return queryResults;
-    }
-    return null;
   }
 
 }

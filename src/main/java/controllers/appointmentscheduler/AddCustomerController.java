@@ -15,6 +15,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * handles the logic of the Add Customer screen
+ */
+
 public class AddCustomerController implements Initializable {
 
   public TextField custID;
@@ -24,6 +28,11 @@ public class AddCustomerController implements Initializable {
   public TextField custPhoneNumber;
   public ComboBox custCountryBox;
   public ComboBox custDivisionBox;
+
+    /**
+     * Saves the customer to the database
+     * @param actionEvent
+     */
 
   public void appSaveButtonClick(ActionEvent actionEvent) {
     try {
@@ -84,6 +93,11 @@ public class AddCustomerController implements Initializable {
     }
   }
 
+    /**
+     * Cancels the add customer screen and returns to the main screen
+     * @param actionEvent
+     */
+
   public void appCancelButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Cancel");
@@ -109,6 +123,12 @@ public class AddCustomerController implements Initializable {
         }
       });
   }
+
+    /**
+     * Populates the combo boxes with the countries and divisions and sets the customer ID
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

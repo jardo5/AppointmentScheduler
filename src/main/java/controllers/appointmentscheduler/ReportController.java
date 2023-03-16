@@ -15,27 +15,99 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * handles the logic of the Report screen
+ */
+
 public class ReportController implements Initializable {
 
+    /**
+     * Contacts Combo Box
+     */
     public ComboBox contactComboBox;
 
+    /**
+     * Schedule Table
+     */
+
     public TableView scheduleTable;
+
+    /**
+     * Schedule Table Appointment ID
+     */
+
     public TableColumn scheduleAppID;
+
+    /**
+     * Schedule Table Title
+     */
     public TableColumn scheduleTitle;
+
+    /**
+     * Schedule Table Type
+     */
     public TableColumn scheduleType;
+
+    /**
+     * Schedule Table Description
+     */
     public TableColumn scheduleDescription;
+
+    /**
+     * Schedule Table Start
+     */
     public TableColumn scheduleStart;
+
+    /**
+     * Schedule Table End
+     */
     public TableColumn scheduleEnd;
+
+    /**
+     * Schedule Table Customer ID
+     */
     public TableColumn scheduleCustomerID;
 
+
+    /**
+     * Appointment Type/Month Table
+     */
     public TableView byTypeTable;
+
+    /**
+     * Appointment Type Column
+     */
     public TableColumn totalType;
+
+    /**
+     * Appointment Month Column
+     */
     public TableColumn totalMonth;
+
+    /**
+     * Appointment Total Count Column
+     */
     public TableColumn totalAppointmentCount;
 
+    /**
+     * Customer by Country Table
+     */
     public TableView byCountryTable;
+
+    /**
+     * Countries Column
+     */
     public TableColumn totalCountry;
+
+    /**
+     * Total Customers Column
+     */
     public TableColumn totalCustomerCount;
+
+    /**
+     * OnClick method for the exit button
+     * @param actionEvent onClick event
+     */
 
     public void exitButtonClick(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -63,7 +135,11 @@ public class ReportController implements Initializable {
                 });
     }
 
-
+    /**
+     * Initializes and sets the values for the tables
+     * @param url url
+     * @param resourceBundle resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

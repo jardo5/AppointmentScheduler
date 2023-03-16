@@ -10,7 +10,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is the Class to hold the Country queries
+ */
+
 public class CountriesSQL {
+
+    /**
+     * Get all countries names
+     * @return allCountriesName
+     * @throws SQLException
+     */
 
     public static ObservableList<String> getAllCountriesName() throws SQLException, Exception {
         ObservableList<String> allCountriesNames = FXCollections.observableArrayList();
@@ -23,37 +33,11 @@ public class CountriesSQL {
         return allCountriesNames;
     }
 
-    public static int findCountryID(int divisionId) throws SQLException {
-        String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = " + divisionId;
-        Connection conn = JDBC.connection;
-        ResultSet result = conn.createStatement().executeQuery(sql);
-        result.next();
-        return result.getInt("Country_ID");
-    }
-
-
-    public static ObservableList<Pair<Integer, String>> getDivisionNameByCountry(String countryId) throws SQLException {
-        ObservableList<Pair<Integer, String>> divisionList = FXCollections.observableArrayList();
-        String sql = "SELECT Division_ID, Division from first_level_divisions where Country_ID = '" + countryId + "'";
-        Connection conn = JDBC.connection;
-        PreparedStatement statement = conn.prepareStatement(sql);
-        ResultSet result = statement.executeQuery();
-        while (result.next()) {
-            divisionList.add(new Pair<>(result.getInt("Division_ID"), result.getString("Division")));
-        }
-        return divisionList;
-    }
-
-
-    public static String getCountryName(int countryID) throws SQLException {
-        String sql = "SELECT Country from countries where Country_ID = ?";
-        Connection conn = JDBC.connection;
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setInt(1, countryID);
-        ResultSet result = statement.executeQuery();
-        result.next();
-        return result.getString("Country");
-    }
+    /**
+     * Get Country ID by Division Name
+     * @return Country ID
+     * @throws SQLException
+     */
 
     public static int getCountryIDByDivision(String divisionName) {
         String sql = "SELECT Country_ID from first_level_divisions where Division = '" + divisionName + "'";
@@ -67,6 +51,12 @@ public class CountriesSQL {
         }
         return 0;
     }
+
+    /**
+     * Get Country Name by Division Name
+     * @return ObservableList of Countries
+     * @throws SQLException
+     */
 
     public static Object getCountryNameByDivision(String divisionName) {
         String sql = "SELECT Country from countries where Country_ID = (SELECT Country_ID from first_level_divisions where Division = '" + divisionName + "')";

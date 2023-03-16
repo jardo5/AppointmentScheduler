@@ -7,7 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.appointmentscheduler.Customers;
 
+/**
+ * Customers SQL for Database
+ */
+
 public class CustomersSQL {
+
+    /**
+     * Get all customers
+     * @return ObservableList of Customers
+     * @throws SQLException
+     */
 
   public static ObservableList<Customers> getAllCustomers() throws SQLException {
     ObservableList<Customers> customerList = FXCollections.observableArrayList();
@@ -33,6 +43,12 @@ public class CustomersSQL {
     return customerList;
   }
 
+    /**
+     * Auto generates customer ID
+     * @return customer
+     * @throws SQLException
+     */
+
   public static int autoCustomerID() throws SQLException {
     Connection conn = JDBC.connection;
     String sql = "SELECT MAX(Customer_ID) FROM customers";
@@ -44,6 +60,11 @@ public class CustomersSQL {
     }
     return ++customerID;
   }
+
+    /**
+     * Add customer
+     * @throws SQLException
+     */
 
   public static void addCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber,String custDivision) {
         try {
@@ -71,6 +92,11 @@ public class CustomersSQL {
         }
     }
 
+    /**
+     * Update customer
+     * @throws SQLException
+     */
+
     public static void updateCustomer(int custID, String custName, String custAddress, String custZipCode, String custPhoneNumber, int custDivision) throws Exception {
         Connection conn = JDBC.connection;
         String sql = "Update Customers set Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Last_Update=?, Last_Updated_By=?, Division_ID=? WHERE Customer_ID=?";
@@ -89,33 +115,10 @@ public class CustomersSQL {
 
     }
 
-
-
-
-
-    public static Customers getCustomer(int customerId) throws SQLException{
-      String sql = "SELECT * FROM customers WHERE Customer_ID = ?";
-      Connection conn = JDBC.connection;
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setInt(1, customerId);
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            Customers customer = new Customers(
-                    result.getInt("Customer_ID"),
-                    result.getString("Customer_Name"),
-                    result.getString("Address"),
-                    result.getString("Postal_Code"),
-                    result.getString("Phone"),
-                    result.getTimestamp("Create_Date").toLocalDateTime(),
-                    result.getString("Created_By"),
-                    result.getTimestamp("Last_Update").toLocalDateTime(),
-                    result.getString("Last_Updated_By"),
-                    result.getInt("Division_ID")
-            );
-            return customer;
-        }
-        return null;
-    }
+    /**
+     * Delete customer
+     * @throws SQLException
+     */
 
     public static void deleteCustomer(int customerId) {
         try {

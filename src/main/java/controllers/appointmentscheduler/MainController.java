@@ -24,6 +24,10 @@ import static controllers.appointmentscheduler.ModifyCustomerController.modifyCu
 import static database.appointmentscheduler.AppSQL.getAllAppointments;
 import static database.appointmentscheduler.CustomersSQL.getAllCustomers;
 
+/**
+ * handles the logic of the Main screen
+ */
+
 public class MainController implements Initializable {
 
   public Button logoutButton;
@@ -52,7 +56,7 @@ public class MainController implements Initializable {
   public Button modifyAppButton;
 
   /* Customer Table */
-  public TableView CustomersTable;
+  public TableView <Customers> CustomersTable;
   public TableColumn custID;
   public TableColumn custName;
   public TableColumn custAddress;
@@ -67,7 +71,10 @@ public class MainController implements Initializable {
   public Button addCustButton;
   public Button modifyCustButton;
 
-
+  /**
+   * Shows shows appointments within a week
+   * @throws SQLException
+   */
   public void radioWeekClick() throws SQLException {
     AppointmentsTable.setItems(AppSQL.getWeeklyAppointments());
 
@@ -90,6 +97,11 @@ public class MainController implements Initializable {
     User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
     Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
   }
+
+    /**
+     * Shows appointments within a month
+     * @throws SQLException
+     */
 
   public void radioMonthClick() throws SQLException {
     AppointmentsTable.setItems(AppSQL.getMonthlyAppointments());
@@ -114,6 +126,11 @@ public class MainController implements Initializable {
     Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
   }
 
+    /**
+     * Shows all appointments
+     * @throws SQLException
+     */
+
   public void radioAllClick(ActionEvent actionEvent) throws Exception {
     AppointmentsTable.setItems(getAllAppointments());
 
@@ -136,6 +153,12 @@ public class MainController implements Initializable {
     User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
     Contact_ID.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
   }
+
+  /**
+   * Populates the customer table and appointment table
+   * @param url
+   * @param resourceBundle
+   */
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -197,6 +220,11 @@ public class MainController implements Initializable {
     }
   }
 
+  /**
+   * Opens report screen
+   * @param actionEvent
+   */
+
   public void reportButtonClick(ActionEvent actionEvent) {
     try {
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
@@ -212,6 +240,11 @@ public class MainController implements Initializable {
       e.printStackTrace();
     }
   }
+
+    /**
+     * Logout button back to login screen
+     * @param actionEvent
+     */
 
   public void logoutButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -235,6 +268,11 @@ public class MainController implements Initializable {
       });
   }
 
+    /** Opens add Appointment screen
+     * Opens add customer screen
+     * @param actionEvent
+     */
+
   public void addAppButtonClick(ActionEvent actionEvent) {
     try {
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
@@ -251,6 +289,11 @@ public class MainController implements Initializable {
       e.printStackTrace();
     }
   }
+
+    /**
+     * Opens modify appointment screen
+     * @param actionEvent
+     */
 
   public void appModifyButtonClick(ActionEvent actionEvent) {
     Appointments selectedAppointment = AppointmentsTable.getSelectionModel().getSelectedItem();
@@ -282,6 +325,10 @@ public class MainController implements Initializable {
 
   }
 
+  /** Opens add customer screen
+   * @param actionEvent
+   */
+
   public void addCustButtonClick(ActionEvent actionEvent) {
     try {
       Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene()
@@ -297,6 +344,11 @@ public class MainController implements Initializable {
       e.printStackTrace();
     }
   }
+
+    /**
+     * Opens modify customer screen
+     * @param actionEvent
+     */
 
   public void modifyCustButtonClick(ActionEvent actionEvent) {
 
@@ -318,6 +370,11 @@ public class MainController implements Initializable {
       e.printStackTrace();
     }
   }
+
+    /**
+     * Deletes selected Appointment
+     * @param actionEvent
+     */
 
   public void onClickDeleteApp(ActionEvent actionEvent){
     Appointments selectedAppointment = AppointmentsTable.getSelectionModel().getSelectedItem();
@@ -345,6 +402,11 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
   }
+
+    /**
+     * Deletes selected Customer
+     * @param actionEvent
+     */
 
     public void onClickDeleteCust(ActionEvent actionEvent){
       Customers selectedCustomer = (Customers) CustomersTable.getSelectionModel().getSelectedItem();

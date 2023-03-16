@@ -32,6 +32,10 @@ import javafx.stage.Stage;
 import models.appointmentscheduler.Appointments;
 import models.appointmentscheduler.Users;
 
+/**
+ * handles the logic of the Login screen
+ */
+
 public class LoginController implements Initializable {
 
   public Button loginButton;
@@ -40,6 +44,12 @@ public class LoginController implements Initializable {
   public TextField passwordField;
   public Label languageLabel;
   public Label zoneLabel;
+
+  /**
+   * This method is called when the login button is called. Validates login and then starts main scene.
+   * @param actionEvent
+   * @throws Exception
+   */
 
   public void loginButtonClick(ActionEvent actionEvent) throws Exception {
     try {
@@ -88,6 +98,11 @@ public class LoginController implements Initializable {
     }
   }
 
+    /**
+     * This method is called when the exit button is called. Exits the program.
+     * @param actionEvent
+     */
+
   public void exitButtonClick(ActionEvent actionEvent) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Exit Appointment Scheduler");
@@ -103,6 +118,11 @@ public class LoginController implements Initializable {
         }
       });
   }
+
+  /**
+   * Checks if there are any appointments within 15 minutes of the current time
+   * @throws SQLException
+   */
 
 
   public static void checkAppointmentsWithin15Minutes() throws SQLException {
@@ -139,10 +159,13 @@ public class LoginController implements Initializable {
     }
   }
 
-
-
   private ResourceBundle Language;
   ZoneId zoneId = ZoneId.systemDefault();
+  /**
+   * This method is called when the program is initialized. Sets the language and timezone.
+   * @param url
+   * @param Language
+   */
 
   @Override
   public void initialize(URL url, ResourceBundle Language) {
