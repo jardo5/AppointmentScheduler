@@ -3,6 +3,7 @@ package controllers.appointmentscheduler;
 import database.appointmentscheduler.AppSQL;
 import database.appointmentscheduler.CustomersSQL;
 import jarod.appointmentscheduler.MainApplication;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import models.appointmentscheduler.Appointments;
 import models.appointmentscheduler.Customers;
@@ -70,6 +73,14 @@ public class MainController implements Initializable {
 
   public Button addCustButton;
   public Button modifyCustButton;
+  
+  
+
+  public TextField appointmentSearchField;
+  public TextField customerSearchField;
+
+  //Search by customer name
+  
 
   /**
    * Shows shows appointments within a week
@@ -442,4 +453,35 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
   }
+
+  public void appointmentSearchClick() throws SQLException {
+    String id = appointmentSearchField.getText();
+    if (id == null || id.isEmpty()) {
+      AppointmentsTable.setItems(getAllAppointments());
+    } else {
+      ObservableList<Appointments> filteredData = FXCollections.observableArrayList();
+      for (Appointments appointment : getAllAppointments()) {
+        if (String.valueOf(appointment.getAppointment_ID()).contains(id)) {
+          filteredData.add(appointment);
+        }
+      }
+      AppointmentsTable.setItems(filteredData);
+    }
+  }
+
+  public void customerSearchClick() throws SQLException {
+    String name = customerSearchField.getText();
+    if (name == null || name.isEmpty()) {
+      CustomersTable.setItems(getAllCustomers());
+    } else {
+      ObservableList<Customers> filteredData = FXCollections.observableArrayList();
+      for (Customers customer : getAllCustomers()) {
+        if (customer.getCustomer_Name().toLowerCase().contains(name.toLowerCase())) {
+          filteredData.add(customer);
+        }
+      }
+      CustomersTable.setItems(filteredData);
+    }
+  }
+
 }
