@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="AppointmentScheduler:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3553a3a-63c6-41f0-a6bf-19f8aef93c0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/appointmentscheduler/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/modifyCustomer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jarod/appointmentscheduler/modifyCustomer.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +35,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2Mf20XmH73nWmlo0xKL8Vv5E9Mu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -47,14 +60,14 @@
     &quot;ToolWindowBuild.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_directory_selection&quot;: &quot;/Users/jarod/Documents/AppointmentScheduler/src/main/java/jarod/appointmentscheduler&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jarod/Desktop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Program Files (x86)/Java/javafx-sdk-20.0.2/bin/vcruntime140_1.dll&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
@@ -127,7 +140,10 @@
       <workItem from="1679862520816" duration="68000" />
       <workItem from="1679871009041" duration="715000" />
       <workItem from="1697492793687" duration="19000" />
-      <workItem from="1697492830701" duration="3223000" />
+      <workItem from="1697492830701" duration="4014000" />
+      <workItem from="1697587694362" duration="997000" />
+      <workItem from="1697921049495" duration="6118000" />
+      <workItem from="1697931874320" duration="959000" />
     </task>
     <servers />
   </component>
